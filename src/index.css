@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+td {
+  @apply py-2 border
+}
+
+th {
+  @apply bg-indigo-600 text-white border py-2
+}
+
+tr:nth-child(even) {
+  @apply bg-blue-200 border
+}
