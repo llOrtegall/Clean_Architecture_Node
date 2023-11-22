@@ -28,9 +28,10 @@ export function UserChatBot () {
       ? <p className='text-center'>Hubo un error al consultar las bases de Datos: {error}</p>
       : loading === true
         ? <p className='text-center'>Cargando...</p>
-        : <table className='table-auto w-4/5 mx-auto text-center'>
+        : <table className='w-8/12'>
             <thead className=''>
               <tr>
+                <th>N°</th>
                 <th>Nombres</th>
                 <th>Documento</th>
                 <th>Telefono</th>
@@ -38,9 +39,10 @@ export function UserChatBot () {
                 <th>N° Registro</th>
               </tr>
             </thead>
-            <tbody className='text-sm text-center'>
+            <tbody className='text-center'>
               {usuarios.map((usuario, index) => (
                 <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{usuario.nombre}</td>
                   <td>{usuario.cedula}</td>
                   <td>{usuario.telefono}</td>

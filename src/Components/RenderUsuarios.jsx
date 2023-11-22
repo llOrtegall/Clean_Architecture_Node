@@ -1,11 +1,14 @@
 import { UserChatBot } from './UsersChatBot'
 import { ValidarUsuarios } from './ValidarUsuarios'
 
-export function RenderUsuarios () {
+// eslint-disable-next-line react/prop-types
+export function RenderUsuarios ({ fun }) {
+  const handleActiveComponent = fun
+
   return (
-    <section className='flex m-2'>
+    <section className='flex m-2 h-96 overflow-auto'>
       <UserChatBot />
-      <ValidarUsuarios />
+      <ValidarUsuarios fun={handleActiveComponent}/>
     </section>
   )
 }
