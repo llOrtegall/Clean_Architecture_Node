@@ -24,7 +24,8 @@ export function UserChatBot () {
   }, [])
 
   return (
-    error !== null
+    <>
+    {error !== null
       ? <p className='text-center'>Hubo un error al consultar las bases de Datos: {error}</p>
       : loading === true
         ? <p className='text-center'>Cargando...</p>
@@ -57,5 +58,7 @@ export function UserChatBot () {
                 }
             </tbody>
           </table>
+      }
+    </>
   )
 }
