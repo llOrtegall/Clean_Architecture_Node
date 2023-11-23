@@ -23,6 +23,12 @@ export function UserChatBot () {
     fetchUsuarios()
   }, [])
 
+  const userNoRepetidos = usuarios.filter((user, index, self) =>
+    index === self.findIndex((t) => (
+      t.cedula === user.cedula
+    ))
+  )
+
   return (
     <>
     {error !== null
@@ -32,6 +38,7 @@ export function UserChatBot () {
         : <table className='w-full text-center'>
             <thead>
                 <tr>
+                  <th>N°</th>
                   <th>Nombre</th>
                   <th>Cedula</th>
                   <th>Correo</th>
@@ -43,9 +50,10 @@ export function UserChatBot () {
             </thead>
             <tbody className=''>
                 {
-                  usuarios.map((user, index) => {
+                  userNoRepetidos.map((user, index) => {
                     return (
-                      <tr key={index}>
+                      <tr key={user.cedula}>
+                        <td>{index + 1}</td>
                         <td>{user.nombre}</td>
                         <td>{user.cedula}</td>
                         <td>{user.correo}</td>
