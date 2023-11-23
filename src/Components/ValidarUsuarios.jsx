@@ -14,7 +14,6 @@ export function ValidarUsuarios ({ fun }) {
 
       axios.post('/getCF', { ccs })
         .then(response => {
-          console.log(response)
           setUser(response.data)
           setLoading(false)
         })

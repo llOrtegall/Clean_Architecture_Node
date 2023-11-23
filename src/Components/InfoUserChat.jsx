@@ -1,11 +1,12 @@
+import { EditarClienteChat } from './EditarCliente.jsx'
 import { InfoIcon } from './IconSvg.jsx'
 
 // eslint-disable-next-line react/prop-types
 export function InfoUserChat ({ inf }) {
   const userS = parseInt(inf)
-
   const usuario = JSON.parse(localStorage.getItem('usuarios')).filter(user => user.cedula === userS)
   const { nombre, cedula, telefono, correo, telwhats } = usuario[0]
+
   return (
     <section className='bg-slate-600 rounded-xl flex items-center justify-around p-2 m-2 h-80 md:text-xs xl:text-base xl:h-60'>
       <article className='flex w-4/12 items-center'>
@@ -25,7 +26,9 @@ export function InfoUserChat ({ inf }) {
 
       </article>
 
-      <article className='p-4 m-4 w-5/12'>{}</article>
+      <article className='p-4 m-4 w-5/12'>
+        <EditarClienteChat client={usuario[0]}/>
+      </article>
     </section>
   )
 }
