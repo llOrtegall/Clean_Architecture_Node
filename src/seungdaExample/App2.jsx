@@ -4,9 +4,7 @@ import { Header } from './Header'
 
 export function App2 () {
   const [usuarios, setUsuarios] = useState([])
-  const [filterUsers, setFilterUsers] = useState({
-    Estado: 'No Existe'
-  })
+  const [filterUsers, setFilterUsers] = useState('')
 
   useEffect(() => {
     axios.get('http://localhost:4040/clientes')
@@ -28,7 +26,10 @@ export function App2 () {
   }, [])
 
   const userfiltrados = () => {
-    return usuarios.filter(usuario => usuario.Estado === filterUsers.Estado)
+    if (filterUsers.Estado === '') return usuarios
+    else if (filterUsers.Estado === 'No Existe') return usuarios.filter(user => user.Estado === 'No Existe')
+    else if (filterUsers.Estado === 'Si Existe') return usuarios.filter(user => user.Estado === 'Si Existe')
+    else return usuarios
   }
 
   return (
