@@ -84,13 +84,13 @@ export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
   )
 }
 
-export function EditarClienteChat ({ client, funClose, fun2, fun3 }) {
+// eslint-disable-next-line react/prop-types
+export function EditarClienteChat ({ client, funClose }) {
+  // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const { nombre1, nombre2, apellido1, apellido2 } = separarNombre(nombre)
   const [updateUser, setUpdateUser] = useState({})
   const [status, setStatus] = useState(null)
-  const fetchData = fun2
-  const handleClose = fun3
 
   function StatusMessage ({ status }) {
     if (status === 'loading') {
@@ -128,8 +128,6 @@ export function EditarClienteChat ({ client, funClose, fun2, fun3 }) {
         setStatus('success')
         setTimeout(() => {
           funClose()
-          handleClose()
-          fetchData()
         }, 1500)
       } else if (res.status === 'error') {
         setStatus('error')

@@ -30,7 +30,7 @@ export function UserComponent ({ user }) {
   }
 
   const components = {
-    EditarClienteChat: <EditarClienteChat funClose={closeComponent}/>,
+    EditarClienteChat: <EditarClienteChat funClose={closeComponent} client={usuario}/>,
     CrearClienteFiel: <CrearClienteFiel />,
     SolicitarEliminacion: <SolicitarEliminacion />
 
@@ -42,14 +42,18 @@ export function UserComponent ({ user }) {
         <div className='p-2'>
           <InfoIcon className='text-white' />
         </div>
-        <div className='w-full'>
-          <dd className='text-white w-full'> <span className='text-green-200 font-semibold pr-2'>Nombres: </span>{usuario.nombre}</dd>
-          <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>N° Documento: </span>{usuario.cedula}</dd>
-          <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Tel / Cel: </span>{usuario.telefono}</dd>
-          <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Correo: </span>{usuario.correo}</dd>
-          <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Cel Registro: </span>{usuario.telwhats}</dd>
-          <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Día Registro: </span>{usuario.fregistro.split('T')[0]}</dd>
-        </div>
+        {
+          usuario.length === 0
+            ? <p className='text-white'>Cargando...</p>
+            : <div className='w-full'>
+            <dd className='text-white w-full'> <span className='text-green-200 font-semibold pr-2'>Nombres: </span>{usuario.nombre}</dd>
+            <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>N° Documento: </span>{usuario.cedula}</dd>
+            <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Tel / Cel: </span>{usuario.telefono}</dd>
+            <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Correo: </span>{usuario.correo}</dd>
+            <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Cel Registro: </span>{usuario.telwhats}</dd>
+            <dd className='text-white w-full'><span className='text-green-200 font-semibold pr-2'>Día Registro: </span>{usuario.fregistro.split('T')[0]}</dd>
+          </div>
+        }
       </article>
 
       <article className='flex flex-col w-2/12'>

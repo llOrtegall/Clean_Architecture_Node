@@ -9,7 +9,7 @@ export function Validacion ({ user, fun }) {
   const handleShowComponent = fun
 
   const handleClick = () => {
-    handleShowComponent({ user })
+    handleShowComponent(user)
   }
 
   useEffect(() => {
