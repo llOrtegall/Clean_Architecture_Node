@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Header } from './Header'
 
 export function App2 () {
   const [usuarios, setUsuarios] = useState([])
@@ -31,7 +32,10 @@ export function App2 () {
   }
 
   return (
-    <Users usuarios={userfiltrados(usuarios)} />
+    <>
+      <Header changeFilters={setFilterUsers}/>
+      <Users usuarios={userfiltrados(usuarios)} />
+    </>
   )
 }
 
