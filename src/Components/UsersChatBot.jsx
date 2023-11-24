@@ -1,85 +1,72 @@
 import { useState, useEffect } from 'react'
-import { Validacion } from './Validacion'
+import { Loading } from './Loading'
 import axios from 'axios'
 
-// eslint-disable-next-line react/prop-types
-function TableRow ({ user, index, fun }) {
-  // eslint-disable-next-line react/prop-types
-  const { nombre, cedula, correo, telefono, telwhats } = user
-  const handleShowComponent = fun
-
-  return (
-    <tr key={cedula}>
-      <td>{index + 1}</td>
-      <td>{nombre}</td>
-      <td>{cedula}</td>
-      <td>{correo}</td>
-      <td>{telefono}</td>
-      <td>{telwhats}</td>
-      <Validacion user={cedula} fun={handleShowComponent}/>
-    </tr>
-  )
-}
-
-// eslint-disable-next-line react/prop-types
-export function UserChatBot ({ fun }) {
+export function UserChatBot () {
   const [usuarios, setUsuarios] = useState([])
-  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const handleShowComponent = fun
-
   useEffect(() => {
-    const fetchUsuarios = async () => {
-      setLoading(true)
-      try {
-        const { data } = await axios.get('/clientes')
-        setUsuarios(data)
+    setLoading(true)
+    axios.get('/clientes')
+      .then((response) => {
+        const fetchedUsers = response.data
+        const cedulas = fetchedUsers.map(user => user.cedula)
+        axios.post('/getCF', { ccs: cedulas })
+          .then(response => {
+            const updatedUsers = fetchedUsers.map((user, index) => ({
+              ...user,
+              ...response.data[index]
+            }))
+            setUsuarios(updatedUsers)
+            setLoading(false)
+          })
+      })
+      .catch((error) => {
+        console.log(error)
         setLoading(false)
-        localStorage.setItem('usuarios', JSON.stringify(data))
-      } catch (err) {
-        setError(err.response.message)
-        setLoading(false)
-      }
-    }
-
-    fetchUsuarios()
+      })
   }, [])
 
-  const userNoRepetidos = usuarios.filter((user, index, self) =>
-    index === self.findIndex((t) => (
-      t.cedula === user.cedula
-    ))
-  )
+  if (loading) {
+    return <Loading />
+  }
 
   return (
-    <>
-    {error !== null
-      ? <p className='text-center'>Hubo un error al consultar las bases de Datos: {error}</p>
-      : loading === true
-        ? <p className='text-center'>Cargando...</p>
-        : <table className='w-full text-center'>
-            <thead>
-                <tr>
-                  <th>N°</th>
-                  <th>Nombre</th>
-                  <th>Cedula</th>
-                  <th>Correo</th>
-                  <th>Telefono</th>
-                  <th>N° Registro</th>
-                  <th>Estado</th>
-                  <th>Opc Usuario</th>
-                </tr>
-            </thead>
-            <tbody className=''>
-            {
-              userNoRepetidos.map((user, index) => (
-              <TableRow key={user.cedula} index={index} user={user} fun={handleShowComponent}/>
-              ))
-            }
-            </tbody>
-          </table>
+    <table className='text-center mx-2'>
+    <tr>
+      <th>N°</th>
+      <th>Nombre</th>
+      <th>Cedula</th>
+      <th>Correo</th>
+      <th>Telefono</th>
+      <th>Fecha de Registro</th>
+      <th>Estado</th>
+      <th>Opc Usuario</th>
+    </tr>
+      { usuarios.map((usuario, index) => {
+        return (
+        <tr key={index}>
+          <td>{index + 1}</td>
+          <td>{usuario.nombre}</td>
+          <td>{usuario.cedula}</td>
+          <td>{usuario.correo}</td>
+          <td>{usuario.telefono}</td>
+          <td>{usuario.fregistro.split('T')[0]}</td>
+          {
+            usuario.Estado === 'Si Existe'
+              ? <td className='bg-green-400'>Registrado</td>
+              : <td className='bg-red-400'>No Registrado</td>
+          }
+          {
+            usuario.Estado === 'Si Existe'
+              ? <td className='bg-green-400'>User Ok</td>
+              : <td className='bg-yellow-400'>Opc User</td>
+          }
+        </tr>
+        )
+      })
       }
-    </>
+    </table>
   )
 }
