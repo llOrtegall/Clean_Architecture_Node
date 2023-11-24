@@ -2,10 +2,32 @@ import { useState, useEffect } from 'react'
 import { Validacion } from './Validacion'
 import axios from 'axios'
 
-export function UserChatBot () {
+// eslint-disable-next-line react/prop-types
+function TableRow ({ user, index, fun }) {
+  // eslint-disable-next-line react/prop-types
+  const { nombre, cedula, correo, telefono, telwhats } = user
+  const handleShowComponent = fun
+
+  return (
+    <tr key={cedula}>
+      <td>{index + 1}</td>
+      <td>{nombre}</td>
+      <td>{cedula}</td>
+      <td>{correo}</td>
+      <td>{telefono}</td>
+      <td>{telwhats}</td>
+      <Validacion user={cedula} fun={handleShowComponent}/>
+    </tr>
+  )
+}
+
+// eslint-disable-next-line react/prop-types
+export function UserChatBot ({ fun }) {
   const [usuarios, setUsuarios] = useState([])
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  const handleShowComponent = fun
 
   useEffect(() => {
     const fetchUsuarios = async () => {
@@ -14,6 +36,7 @@ export function UserChatBot () {
         const { data } = await axios.get('/clientes')
         setUsuarios(data)
         setLoading(false)
+        localStorage.setItem('usuarios', JSON.stringify(data))
       } catch (err) {
         setError(err.response.message)
         setLoading(false)
@@ -49,21 +72,11 @@ export function UserChatBot () {
                 </tr>
             </thead>
             <tbody className=''>
-                {
-                  userNoRepetidos.map((user, index) => {
-                    return (
-                      <tr key={user.cedula}>
-                        <td>{index + 1}</td>
-                        <td>{user.nombre}</td>
-                        <td>{user.cedula}</td>
-                        <td>{user.correo}</td>
-                        <td>{user.telefono}</td>
-                        <td>{user.telwhats}</td>
-                        <Validacion user={user.cedula} />
-                      </tr>
-                    )
-                  })
-                }
+            {
+              userNoRepetidos.map((user, index) => (
+              <TableRow key={user.cedula} index={index} user={user} fun={handleShowComponent}/>
+              ))
+            }
             </tbody>
           </table>
       }
