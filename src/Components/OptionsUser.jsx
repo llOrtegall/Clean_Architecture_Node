@@ -1,11 +1,9 @@
 import axios from 'axios'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { separarNombre } from '../services/funtionsReutilizables'
-import { CloseIcon } from './IconSvg.jsx'
-import { UserContext } from '../context/UserContext.jsx'
 
 // eslint-disable-next-line react/prop-types
-export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
+export function CrearClienteFiel ({ client }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const [loading, setLoading] = useState(false)
@@ -13,15 +11,8 @@ export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
   const [messageError, setMessageError] = useState('')
   const [selectedValue, setSelectedValue] = useState(null)
 
-  const fetchData = fun2
-  const handleClose = fun3
-
   const handleChange = (ev) => {
     setSelectedValue(ev.target.value)
-  }
-
-  const handleClickClose = () => {
-    funClose()
   }
 
   const sendCreateClient = () => {
@@ -38,8 +29,7 @@ export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
         setUserOk('Usuario creado con exito')
         setLoading(false)
         setTimeout(() => {
-          fetchData()
-          handleClose()
+          window.location.reload()
         }, 2000)
       })
       .catch(err => {
@@ -78,25 +68,18 @@ export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
         {loading && <p className='text-center absolute bottom-0 left-40'>Creando Usuario ...</p>}
         {userOk && <p className='text-center text-green-600 font-bold absolute bottom-0 left-40'> {userOk} </p>}
         {messageError && <p className='text-center text-red-600 font-semibold absolute bottom-0 left-40'> {messageError} </p>}
-
       </section>
-      <button className='absolute top-0 right-0 rounded-full hover:bg-red-500 hover:text-white' onClick={handleClickClose}>
-        <CloseIcon />
-      </button>
     </article>
   )
 }
 
 // eslint-disable-next-line react/prop-types
-export function EditarClienteChat ({ client, funClose }) {
+export function EditarClienteChat ({ client }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const { nombre1, nombre2, apellido1, apellido2 } = separarNombre(nombre)
   const [updateUser, setUpdateUser] = useState({})
   const [status, setStatus] = useState(null)
-  const handleClose = funClose
-
-  const { setSignalUser, setUsuario } = useContext(UserContext)
 
   // eslint-disable-next-line react/prop-types
   function StatusMessage ({ status }) {
@@ -130,9 +113,7 @@ export function EditarClienteChat ({ client, funClose }) {
       if (res.status === 200) {
         setStatus('success')
         setTimeout(() => {
-          handleClose()
-          setSignalUser(true)
-          setUsuario(null)
+          window.location.reload()
         }, 1500)
       } else if (res.status === 'error') {
         setStatus('error')
@@ -168,16 +149,12 @@ export function EditarClienteChat ({ client, funClose }) {
           <StatusMessage status={status} />
         </div>
       </form>
-
-      <button className='absolute top-0 right-0 rounded-full hover:bg-red-500 hover:text-white'>
-        <CloseIcon />
-      </button>
     </article>
   )
 }
 
 // eslint-disable-next-line react/prop-types
-export function SolicitarEliminacion ({ client, funClose }) {
+export function SolicitarEliminacion ({ client }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
 
@@ -185,12 +162,6 @@ export function SolicitarEliminacion ({ client, funClose }) {
   const [error, setError] = useState(null)
   const [responseOk, setResponseOk] = useState(null)
   const [motivo, setMotivo] = useState('')
-
-  console.log(motivo)
-
-  const handleClickClose = () => {
-    funClose()
-  }
 
   const sendCreateClient = () => {
     setLoading(true)
@@ -201,7 +172,7 @@ export function SolicitarEliminacion ({ client, funClose }) {
         setLoading(false)
         setTimeout(() => {
           window.location.reload()
-        }, 3000)
+        }, 1500)
       })
       .catch(err => {
         setError(err.response.data.message)
@@ -229,9 +200,6 @@ export function SolicitarEliminacion ({ client, funClose }) {
           {responseOk && <p className='text-center'> Reporte Enviado </p>}
         </div>
       </section>
-      <button className='absolute top-0 right-0 rounded-full hover:bg-red-500 hover:text-white' onClick={handleClickClose}>
-        <CloseIcon />
-      </button>
     </article>
   )
 }
