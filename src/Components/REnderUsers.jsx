@@ -1,10 +1,11 @@
-import { useUser } from '../context/user'
+import { useContext } from 'react'
+import { UserContext } from '../context/UserContext'
 
 export function RenderUsers ({ usuarios }) {
-  const { setUser } = useUser()
+  const { setUsuario } = useContext(UserContext)
 
-  const handleLogin = (user) => {
-    setUser(user)
+  const handleClick = (user) => {
+    setUsuario(user)
   }
 
   return (
@@ -25,7 +26,7 @@ export function RenderUsers ({ usuarios }) {
             {
               user.Estado === 'Si Existe'
                 ? <td className='bg-green-400'>User Ok</td>
-                : <td className='bg-yellow-400' onClick={() => handleLogin(user)}>Opc User</td>
+                : <td className='bg-yellow-400' onClick={() => handleClick(user)}>Opc User</td>
             }
         </tr>
       )

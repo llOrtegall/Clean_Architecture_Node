@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { LoginForm } from './Components/LoginForm'
+import { UserProvider } from './context/UserContext.jsx'
 import { useAuth } from './Auth/AuthContext'
 import { DashBoard } from './Components/DashBoard'
 import { useEffect } from 'react'
@@ -23,7 +24,11 @@ export function App () {
   }, [])
 
   if (user) {
-    return <DashBoard />
+    return (
+      <UserProvider>
+        <DashBoard />
+      </UserProvider>
+    )
   }
 
   return <LoginForm />
