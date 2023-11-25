@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Loading } from './Loading'
-import axios from 'axios'
 import { RenderUsers } from './RenderUsers'
+import { Loading } from './IconSvg.jsx'
+import axios from 'axios'
 
 export function UserChatBot () {
   const [usuarios, setUsuarios] = useState([])

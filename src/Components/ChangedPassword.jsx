@@ -36,7 +36,7 @@ export function ChangedPassword ({ username }) {
   }
 
   return (
-    <section className='bg-slate-600 shadow-2xl w-96 h-96 p-4 rounded-lg flex items-center justify-center '>
+    <section className='bg-slate-600 shadow-2xl w-96 h-96 p-4 rounded-lg flex items-center justify-center absolute'>
       <form onSubmit={handleChangePassword} className='flex flex-col items-center'>
         <h2 className='text-center text-xl font-bold uppercase text-white'> Cambiar Contraseña </h2>
         <p className='py-2 font-bold text-yellow-300'>Usuario: <span className='text-green-400'>{username}</span></p>

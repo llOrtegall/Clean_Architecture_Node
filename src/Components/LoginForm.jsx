@@ -31,7 +31,7 @@ export const LoginForm = () => {
           className='p-1 rounded-md'
             type="text"
             value={user}
-            onChange={(e) => setUser(e.target.value)}
+            onChange={({ target: { value } }) => setUser(value)}
           />
         </label>
         <label className='flex m-2 w-72 items-center justify-between'>
@@ -40,7 +40,7 @@ export const LoginForm = () => {
           className='p-1 rounded-md'
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={({ target: { value } }) => setPassword(value)}
           />
         </label>
         <button className='bg-blue-700 w-52 rounded-md p-2 mt-4 text-white font-bold' type="submit">Ingresar</button>

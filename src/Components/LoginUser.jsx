@@ -37,7 +37,7 @@ export function LoginUser () {
         </button>
 
       </nav>
-      <section className='absolute right-1/3'>
+      <section className=''>
         {showChangePasword === true ? <ChangedPassword username={username} /> : null}
       </section>
     </>
