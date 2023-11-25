@@ -5,15 +5,22 @@ import { useAuth } from './Auth/AuthContext'
 import { DashBoard } from './Components/DashBoard'
 import { useEffect } from 'react'
 
+axios.defaults.baseURL = ' http://127.0.0.1:4040'
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://172.20.1.160:3000'
+
+function getCookie (name) {
+  const cookies = document.cookie.split('; ')
+  const cookie = cookies.find(cookie => cookie.startsWith(name + '='))
+  return cookie ? cookie.split('=')[1] : null
+}
 
 export function App () {
   const { user, login } = useAuth()
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('/profile')
+        const token = getCookie('token')
+        const response = await axios.post('/profile', { token })
         login(response.data)
       } catch (error) {
         console.error('Error checking auth', error)

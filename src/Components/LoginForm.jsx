@@ -13,6 +13,7 @@ export const LoginForm = () => {
     axios.post('/login', { user, password })
       .then(res => {
         login(res.data)
+        document.cookie = `token=${res.data.token}; path=/`
       })
       .catch(err => {
         setError(err.response.data.error)
