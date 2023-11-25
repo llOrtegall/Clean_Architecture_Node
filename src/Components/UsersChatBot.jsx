@@ -48,8 +48,8 @@ export function UserChatBot () {
 
   return (
     <>
-      <h1 className='mx-2 text-center bg-blue-500 text-white font-bold py-2 rounded-lg'>Usuarios Registrados Por Chat Boot</h1>
-        <table className='text-center mx-2'>
+      <h1 className='text-center bg-blue-500 text-white font-bold py-2 rounded-lg'>Usuarios Registrados Por Chat Boot</h1>
+        <table className='text-center'>
           <tr>
             <th>N°</th>
             <th>Nombre</th>
