@@ -6,7 +6,7 @@ import { DashBoard } from './Components/DashBoard'
 import { useEffect } from 'react'
 
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:4040'
+axios.defaults.baseURL = 'http://172.20.1.160:3000'
 
 export function App () {
   const { user, login } = useAuth()
