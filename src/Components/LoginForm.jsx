@@ -23,7 +23,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <section className='bg-blue-300 w-screen h-screen flex flex-col items-center justify-center relative'>
+    <section className='w-screen h-screen flex flex-col items-center justify-center relative fondo'>
       <form onSubmit={handleSubmit} className='bg-white w-96 h-2/3 rounded-xl p-12 shadow-2xl relative flex flex-col gap-8 justify-between'>
       <h1 className='text-orange-600 font-bold text-3xl text-center'>ChatBot Validator</h1>
       <br />

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.fondo {
+  background: url(/public/fondo.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
 td {
   @apply py-2 border
 }
