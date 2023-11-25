@@ -26,7 +26,7 @@ export function RenderUsers ({ usuarios }) {
             {
               user.Estado === 'Si Existe'
                 ? <td className='bg-green-400'>User Ok</td>
-                : <td className='bg-yellow-400' onClick={() => handleClick(user)}>Opc User</td>
+                : <td className='bg-yellow-400 hover:bg-blue-400 hover:cursor-pointer' onClick={() => handleClick(user)}>Opc User</td>
             }
         </tr>
       )
