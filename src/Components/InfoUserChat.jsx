@@ -5,7 +5,7 @@ import { EditarClienteChat, CrearClienteFiel, SolicitarEliminacion } from './Opt
 import { UserContext } from '../context/UserContext'
 
 // eslint-disable-next-line react/prop-types
-export function InfoUserChat ({ user }) {
+export function InfoUserChat () {
   const [activeComponent, setActiveComponent] = useState(null)
   const { usuario } = useContext(UserContext)
 
@@ -25,7 +25,7 @@ export function InfoUserChat ({ user }) {
 
   useEffect(() => {
     setActiveComponent(null)
-  }, [user])
+  }, [usuario])
 
   return (
     usuario && (

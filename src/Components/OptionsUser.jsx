@@ -4,7 +4,9 @@ import { separarNombre } from '../services/funtionsReutilizables'
 import { CloseIcon } from './IconSvg.jsx'
 import { UserContext } from '../context/UserContext.jsx'
 
+// eslint-disable-next-line react/prop-types
 export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
+  // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const [loading, setLoading] = useState(false)
   const [userOk, setUserOk] = useState('')
@@ -174,7 +176,9 @@ export function EditarClienteChat ({ client, funClose }) {
   )
 }
 
+// eslint-disable-next-line react/prop-types
 export function SolicitarEliminacion ({ client, funClose }) {
+  // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
 
   const [loading, setLoading] = useState(false)
