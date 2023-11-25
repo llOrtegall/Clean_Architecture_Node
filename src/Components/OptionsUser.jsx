@@ -1,7 +1,8 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { separarNombre } from '../services/funtionsReutilizables'
 import { CloseIcon } from './IconSvg.jsx'
+import { UserContext } from '../context/UserContext.jsx'
 
 export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
   const { cedula, nombre, telefono, correo } = client
@@ -84,14 +85,18 @@ export function CrearClienteFiel ({ client, funClose, fun2, fun3 }) {
   )
 }
 
-export function EditarClienteChat ({ client, funClose, fun2, fun3 }) {
+// eslint-disable-next-line react/prop-types
+export function EditarClienteChat ({ client, funClose }) {
+  // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const { nombre1, nombre2, apellido1, apellido2 } = separarNombre(nombre)
   const [updateUser, setUpdateUser] = useState({})
   const [status, setStatus] = useState(null)
-  const fetchData = fun2
-  const handleClose = fun3
+  const handleClose = funClose
 
+  const { setSignalUser, setUsuario } = useContext(UserContext)
+
+  // eslint-disable-next-line react/prop-types
   function StatusMessage ({ status }) {
     if (status === 'loading') {
       return <div className='absolute -bottom-11 xl:-bottom-6 text-center font-semibold text-blue-300'>Cargando...</div>
@@ -102,10 +107,6 @@ export function EditarClienteChat ({ client, funClose, fun2, fun3 }) {
     } else {
       return null
     }
-  }
-
-  const handleClickClose = () => {
-    funClose()
   }
 
   useEffect(() => {
@@ -127,9 +128,9 @@ export function EditarClienteChat ({ client, funClose, fun2, fun3 }) {
       if (res.status === 200) {
         setStatus('success')
         setTimeout(() => {
-          funClose()
           handleClose()
-          fetchData()
+          setSignalUser(true)
+          setUsuario(null)
         }, 1500)
       } else if (res.status === 'error') {
         setStatus('error')
@@ -166,7 +167,7 @@ export function EditarClienteChat ({ client, funClose, fun2, fun3 }) {
         </div>
       </form>
 
-      <button className='absolute top-0 right-0 rounded-full hover:bg-red-500 hover:text-white' onClick={handleClickClose}>
+      <button className='absolute top-0 right-0 rounded-full hover:bg-red-500 hover:text-white'>
         <CloseIcon />
       </button>
     </article>

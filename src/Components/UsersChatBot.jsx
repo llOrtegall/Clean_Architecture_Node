@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { RenderUsers } from './RenderUsers'
+import { UserContext } from '../context/UserContext.jsx'
 import { Loading } from './IconSvg.jsx'
 import axios from 'axios'
 
@@ -18,6 +19,7 @@ export function UserChatBot () {
   const [usuarios, setUsuarios] = useState([])
   const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
+  const { signalUser } = useContext(UserContext)
 
   useEffect(() => {
     setLoading(true)
@@ -39,7 +41,7 @@ export function UserChatBot () {
         console.log(error)
         setLoading(false)
       })
-  }, [])
+  }, [signalUser])
 
   const handleFilter = (ev) => {
     console.log(ev.target.value)

@@ -1,22 +1,9 @@
 import { InfoUserChat } from './InfoUserChat.jsx'
-import { UserContext } from '../context/UserContext.jsx'
 import { LoginUser } from './LoginUser.jsx'
 import { UserChatBot } from './UsersChatBot.jsx'
-import { useContext, useEffect, useState } from 'react'
 
 // eslint-disable-next-line react/prop-types
 export function DashBoard () {
-  const { usuario } = useContext(UserContext)
-  const [activeComponent, setActiveComponent] = useState(false)
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    if (usuario) {
-      setActiveComponent(true)
-      setUser(usuario)
-    }
-  }, [usuario])
-
   return (
       <main className='w-full'>
         <section>
@@ -26,7 +13,7 @@ export function DashBoard () {
           <UserChatBot />
         </section>
         <section>
-         { activeComponent && <InfoUserChat user={user}/> }
+         <InfoUserChat />
         </section>
       </main>
   )
