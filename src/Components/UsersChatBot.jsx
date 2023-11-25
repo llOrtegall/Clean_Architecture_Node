@@ -3,9 +3,20 @@ import { RenderUsers } from './RenderUsers'
 import { Loading } from './IconSvg.jsx'
 import axios from 'axios'
 
+function useFilters ({ usuarios }) {
+  const [filterUsers, setFilterUsers] = useState('Ninguno')
+  const userfiltrados = () => {
+    if (filterUsers === 'Ninguno') return usuarios
+    else if (filterUsers === 'No Existe') return usuarios.filter(user => user.Estado === 'No Existe')
+    else if (filterUsers === 'Si Existe') return usuarios.filter(user => user.Estado === 'Si Existe')
+    else return usuarios
+  }
+  return { userfiltrados, setFilterUsers }
+}
+
 export function UserChatBot () {
   const [usuarios, setUsuarios] = useState([])
-  const [filterUsers, setFilterUsers] = useState('Ninguno')
+  const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -29,13 +40,6 @@ export function UserChatBot () {
         setLoading(false)
       })
   }, [])
-
-  const userfiltrados = () => {
-    if (filterUsers === 'Ninguno') return usuarios
-    else if (filterUsers === 'No Existe') return usuarios.filter(user => user.Estado === 'No Existe')
-    else if (filterUsers === 'Si Existe') return usuarios.filter(user => user.Estado === 'Si Existe')
-    else return usuarios
-  }
 
   const handleFilter = (ev) => {
     console.log(ev.target.value)
