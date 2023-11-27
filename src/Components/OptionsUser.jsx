@@ -17,7 +17,7 @@ export function CrearClienteFiel ({ client }) {
 
   const sendCreateClient = () => {
     if (selectedValue === null || selectedValue === ' ') {
-      setMessageError('Por favor, selecciona una opción sexo, antes de continuar.')
+      setMessageError('Selecciona una opción sexo, para continuar.')
       setTimeout(() => {
         setMessageError('')
       }, 3000)
@@ -45,9 +45,9 @@ export function CrearClienteFiel ({ client }) {
   }
 
   return (
-    <article className='bg-blue-400 relative rounded-lg p-2'>
-      <section className='p-2 m-2 flex items-center'>
-        <div className='flex flex-col pl-10'>
+    <article className='bg-blue-400 rounded-lg p-2'>
+      <section className='p-2 m-2 flex items-center justify-around relative'>
+        <div className='flex flex-col'>
           <dd className='text-black '><span className='text-black font-bold pr-2'>Nombre: </span>{nombre}</dd>
           <dd className='text-black '><span className='text-black font-bold pr-2'>N° Documento: </span>{cedula}</dd>
           <dd className='text-black '><span className='text-black font-bold pr-2'>Tel / Cel: </span>{telefono}</dd>
@@ -61,13 +61,13 @@ export function CrearClienteFiel ({ client }) {
             </select>
           </div>
         </div>
-        <button onClick={sendCreateClient} className='bg-green-500 rounded-md h-12 ml-24 text-white font-semibold p-2 mt-4 hover:bg-white hover:text-black'>
+        <button onClick={sendCreateClient} className='bg-green-500 rounded-md text-white font-semibold p-2 mt-4 hover:bg-white hover:text-black'>
           Crea Cliente Fiel
         </button>
 
-        {loading && <p className='text-center absolute bottom-0 left-40'>Creando Usuario ...</p>}
-        {userOk && <p className='text-center text-green-600 font-bold absolute bottom-0 left-40'> {userOk} </p>}
-        {messageError && <p className='text-center text-red-600 font-semibold absolute bottom-0 left-40'> {messageError} </p>}
+        {loading && <p className='right-0 absolute bottom-0'>Creando Usuario ...</p>}
+        {userOk && <p className='right-0 text-green-600 font-bold absolute bottom-0'> {userOk} </p>}
+        {messageError && <p className='right-0 text-red-600 font-semibold absolute bottom-0'> {messageError} </p>}
       </section>
     </article>
   )

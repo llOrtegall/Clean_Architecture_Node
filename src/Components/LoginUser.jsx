@@ -14,11 +14,11 @@ export function LoginUser () {
 
   return (
     <>
-      <nav className='flex items-center justify-between bg-slate-600 m-2 px-4 py-6 mx rounded-xl text-white md:text-xs xl:text-base'>
+      <nav className='flex items-center justify-between bg-slate-600 m-2 px-4 py-6 mx rounded-xl text-white relative'>
         <figure className='flex items-center'>
           <UserIcon />
           <section>
-            <h3 className='font-semibold text-xl md:text-xs xl:text-base'>
+            <h3 className='font-semibold'>
               Bienvenid@ <span>{nombres}</span><span> {apellidos} </span>
             </h3>
             <div className='flex'>
@@ -37,7 +37,7 @@ export function LoginUser () {
         </button>
 
       </nav>
-      <section className=''>
+      <section className='absolute 2xl:right-1/4 xl:right-96 lg:right-80'>
         {showChangePasword === true ? <ChangedPassword username={username} /> : null}
       </section>
     </>
