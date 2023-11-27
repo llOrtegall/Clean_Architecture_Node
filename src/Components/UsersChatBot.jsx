@@ -44,7 +44,6 @@ export function UserChatBot () {
   }, [signalUser])
 
   const handleFilter = (ev) => {
-    console.log(ev.target.value)
     setFilterUsers(ev.target.value)
   }
 

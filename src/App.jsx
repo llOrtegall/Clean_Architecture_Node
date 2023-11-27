@@ -5,7 +5,7 @@ import { useAuth } from './Auth/AuthContext'
 import { DashBoard } from './Components/DashBoard'
 import { useEffect } from 'react'
 
-axios.defaults.baseURL = 'http://localhost:4040'
+axios.defaults.baseURL = 'http://172.20.1.160:3000'
 axios.defaults.withCredentials = true
 
 function getCookie (name) {
