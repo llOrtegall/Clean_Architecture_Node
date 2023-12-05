@@ -12,8 +12,7 @@ export const LoginForm = () => {
     e.preventDefault()
     axios.post('/login', { user, password })
       .then(res => {
-        console.log(res.data)
-        login(res.data)
+        login(res.data.user)
         document.cookie = `token=${res.data.token}; path=/`
       })
       .catch(err => {

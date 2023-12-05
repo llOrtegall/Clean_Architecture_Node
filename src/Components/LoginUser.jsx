@@ -6,7 +6,8 @@ import { ChangedPassword } from './ChangedPassword.jsx'
 export function LoginUser () {
   const [showChangePasword, setShowChangePasword] = useState(false)
   const { user, logout } = useAuth()
-  const { nombres, apellidos, username, correo } = user
+
+  const { id, nombres, apellidos, username, correo, proceso, rol } = user
 
   const handleShowChangePassword = () => {
     setShowChangePasword(!showChangePasword)
@@ -23,6 +24,9 @@ export function LoginUser () {
             </h3>
             <div className='flex'>
               <p className='small-text'>Usuario: <span className='font-bold pr-2'>{username}</span>  Correo: <span className='font-semibold lowercase'>{correo} </span></p>
+            </div>
+            <div className='flex justify-between'>
+              <p>Proceso: <span className='font-bold pr-2'>{proceso}</span></p> <p>Cargo: <span className='font-bold pr-2'>{rol}</span></p> <p>ID: <span className='font-bold pr-2'>{id}</span></p>
             </div>
           </section>
         </figure>

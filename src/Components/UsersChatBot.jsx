@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { RenderUsers } from './RenderUsers'
+import { RenderUsers } from './RenderUsers.jsx'
 import { UserContext } from '../context/UserContext.jsx'
 import { Loading } from './IconSvg.jsx'
 import axios from 'axios'
