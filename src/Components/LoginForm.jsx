@@ -6,13 +6,14 @@ export const LoginForm = () => {
   const [user, setUser] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
+
   const { login } = useAuth()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post('/login', { user, password })
       .then(res => {
-        login(res.data.user)
+        login(res.data.auth)
         document.cookie = `token=${res.data.token}; path=/`
       })
       .catch(err => {

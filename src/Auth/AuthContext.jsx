@@ -4,12 +4,12 @@ const AuthContext = createContext()
 
 // eslint-disable-next-line react/prop-types
 export function AuthProvider ({ children }) {
-  const [user, setUser] = useState(null)
-  const login = (user) => {
-    setUser(user)
+  const [user, setUser] = useState(false)
+  const login = (auth) => {
+    if (auth === true) setUser(true)
   }
   const logout = () => {
-    setUser(null)
+    setUser(false)
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   }
   return (
