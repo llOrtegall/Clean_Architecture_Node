@@ -5,6 +5,7 @@ const AuthContext = createContext()
 // eslint-disable-next-line react/prop-types
 export function AuthProvider ({ children }) {
   const [loggedIn, setLoggedIn] = useState(false)
+  const [company, setCompany] = useState(null)
   const [user, setUser] = useState({})
   const login = (auth, user) => {
     if (auth === true) {
@@ -16,10 +17,11 @@ export function AuthProvider ({ children }) {
     setLoggedIn(false)
     setUser({})
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/chat_bot;'
   }
 
   return (
-    <AuthContext.Provider value={{ loggedIn, user, login, logout }}>
+    <AuthContext.Provider value={{ loggedIn, user, login, logout, company, setCompany }}>
       {children}
     </AuthContext.Provider>
   )

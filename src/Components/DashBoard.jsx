@@ -6,7 +6,7 @@ import { UserChatBot } from './UsersChatBot.jsx'
 
 // eslint-disable-next-line react/prop-types
 export function DashBoard () {
-  const { user } = useAuth()
+  const { user, setCompany } = useAuth()
   const { empresa } = user
   const [selectedEmpresa, setSelectedEmpresa] = useState(empresa)
 
@@ -16,8 +16,10 @@ export function DashBoard () {
 
   function RenderUsersChatBot () {
     if (selectedEmpresa === 'Servired') {
+      setCompany(selectedEmpresa)
       return <UserChatBot select={selectedEmpresa} />
     } else if (selectedEmpresa === 'Multired') {
+      setCompany(selectedEmpresa)
       return <UserChatBot select={selectedEmpresa} />
     } else {
       return (

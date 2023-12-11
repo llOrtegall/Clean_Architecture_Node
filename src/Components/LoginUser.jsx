@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 export function LoginUser () {
   const [showChangePasword, setShowChangePasword] = useState(false)
-  const { logout, user } = useAuth()
+  const { logout, user, company } = useAuth()
 
   const { id, nombres, apellidos, username, correo, proceso, rol } = user
 
@@ -20,7 +20,7 @@ export function LoginUser () {
           <UserIcon />
           <section>
             <h3 className='font-semibold'>
-              Bienvenid@ <span>{nombres}</span><span> {apellidos} </span>
+              Bienvenid@ <span className='pl-2'>{nombres}</span><span> {apellidos} --- </span> Empresa: { company !== null || undefined ? <span className='font-bold pl-2'>{company}</span> : null}
             </h3>
             <div className='flex'>
               <p className='small-text'>Usuario: <span className='font-bold pr-2'>{username}</span>  Correo: <span className='font-semibold lowercase'>{correo} </span></p>
