@@ -9,20 +9,31 @@ import { UserProvider } from './context/UserContext.jsx'
 axios.defaults.baseURL = 'http://localhost:6060'
 
 export function App () {
-  const { user, login } = useAuth()
+  const { login, loggedIn } = useAuth()
 
   useEffect(() => {
-    const token = getCookie('token')
-    axios.get('/profile', {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(res => {
-      login(res.data.auth)
-    })
+    const getLoggedIn = async () => {
+      try {
+        const token = getCookie('token')
+        const result = await fetch('http://172.20.1.160:3000/profile', {
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+        })
+        if (result.status === 200) {
+          const usuario = await result.json()
+          login(usuario.auth, usuario.user)
+        }
+        if (result.status === 401) {
+          login(false)
+        }
+      } catch (error) {
+        if (error) throw new Error(error)
+        console.log(error)
+      }
+    }
+    getLoggedIn()
   }, [])
 
-  console.log(user)
-
-  if (user === true) {
+  if (loggedIn === true) {
     return (
       <UserProvider>
         <DashBoard />

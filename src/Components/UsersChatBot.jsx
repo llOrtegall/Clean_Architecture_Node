@@ -23,7 +23,7 @@ export function UserChatBot () {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('/clientes')
+    axios.get('/clientesServired')
       .then((response) => {
         const fetchedUsers = response.data
         const cedulas = fetchedUsers.map(user => user.cedula)
