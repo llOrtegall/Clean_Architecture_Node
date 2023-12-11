@@ -11,6 +11,7 @@ export function CrearClienteFiel ({ client }) {
   const [userOk, setUserOk] = useState('')
   const [messageError, setMessageError] = useState('')
   const [selectedValue, setSelectedValue] = useState(null)
+  const { company, setUsuario, setSignalUser } = useContext(UserContext)
 
   const handleChange = (ev) => {
     setSelectedValue(ev.target.value)
@@ -25,13 +26,14 @@ export function CrearClienteFiel ({ client }) {
       return
     }
     setLoading(true)
-    axios.post('/newCF', { cedula, nombre, telefono, correo, sexo: selectedValue })
+    axios.post('/newCF', { cedula, nombre, telefono, correo, sexo: selectedValue, empresa: company })
       .then(res => {
         setUserOk('Usuario creado con exito')
         setLoading(false)
         setTimeout(() => {
-          window.location.reload()
-        }, 2000)
+          setUsuario(null)
+          setSignalUser(false)
+        }, 1500)
       })
       .catch(err => {
         setLoading(false)
@@ -81,7 +83,7 @@ export function EditarClienteChat ({ client }) {
   const { nombre1, nombre2, apellido1, apellido2 } = separarNombre(nombre)
   const [updateUser, setUpdateUser] = useState({})
   const [status, setStatus] = useState(null)
-  const { company } = useContext(UserContext)
+  const { company, setSignalUser, setUsuario } = useContext(UserContext)
 
   const emp = company
 
@@ -117,8 +119,6 @@ export function EditarClienteChat ({ client }) {
     }
   }
 
-  console.log(Seleccionado(emp))
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('loading')
@@ -127,7 +127,8 @@ export function EditarClienteChat ({ client }) {
       if (res.status === 200) {
         setStatus('success')
         setTimeout(() => {
-          window.location.reload()
+          setSignalUser(prevState => !prevState)
+          setUsuario(null)
         }, 1500)
       } else if (res.status === 'error') {
         setStatus('error')
