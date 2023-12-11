@@ -14,7 +14,7 @@ function useFilters ({ usuarios }) {
   return { userfiltrados, setFilterUsers }
 }
 
-export function UserChatBot () {
+export function UserChatBotServired () {
   const [usuarios, setUsuarios] = useState([])
   const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
