@@ -1,9 +1,8 @@
 import { useAuth } from '../Auth/AuthContext.jsx'
 import { InfoUserChat } from './InfoUserChat.jsx'
 import { LoginUser } from './LoginUser.jsx'
-import { UserChatBotServired } from './UsersChatBotServired.jsx'
-import { UserChatBotMultired } from './UsersChatBotMultired.jsx'
 import { useState } from 'react'
+import { UserChatBot } from './UsersChatBot.jsx'
 
 // eslint-disable-next-line react/prop-types
 export function DashBoard () {
@@ -11,17 +10,15 @@ export function DashBoard () {
   const { empresa } = user
   const [selectedEmpresa, setSelectedEmpresa] = useState(empresa)
 
-  console.log(empresa)
-
   function handleSelectChange (e) {
     setSelectedEmpresa(e.target.value)
   }
 
   function RenderUsersChatBot () {
     if (selectedEmpresa === 'Servired') {
-      return <UserChatBotServired />
+      return <UserChatBot select={selectedEmpresa}/>
     } else if (selectedEmpresa === 'Multired') {
-      return <UserChatBotMultired />
+      return <UserChatBot select={selectedEmpresa}/>
     } else {
       return (
         <div className='flex justify-center'>

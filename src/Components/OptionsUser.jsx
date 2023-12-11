@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { separarNombre } from '../services/funtionsReutilizables'
+import { UserContext } from '../context/UserContext'
 
 // eslint-disable-next-line react/prop-types
 export function CrearClienteFiel ({ client }) {
@@ -80,6 +81,9 @@ export function EditarClienteChat ({ client }) {
   const { nombre1, nombre2, apellido1, apellido2 } = separarNombre(nombre)
   const [updateUser, setUpdateUser] = useState({})
   const [status, setStatus] = useState(null)
+  const { company } = useContext(UserContext)
+
+  const emp = company
 
   // eslint-disable-next-line react/prop-types
   function StatusMessage ({ status }) {
@@ -105,11 +109,21 @@ export function EditarClienteChat ({ client }) {
     }))
   }
 
+  function Seleccionado (emp) {
+    if (emp === 'Servired') {
+      return '/clienteServired'
+    } else if (emp === 'Multired') {
+      return '/cliente'
+    }
+  }
+
+  console.log(Seleccionado(emp))
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('loading')
     try {
-      const res = await axios.put('/cliente', { updateUser })
+      const res = await axios.put(`${Seleccionado(emp)}`, { updateUser })
       if (res.status === 200) {
         setStatus('success')
         setTimeout(() => {

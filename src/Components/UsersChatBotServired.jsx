@@ -23,7 +23,7 @@ export function UserChatBotServired () {
   const getDataUsers = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:6060/clientes')
+      const response = await fetch('http://localhost:6060/clientesServired')
       if (response.status === 200) {
         const data = await response.json()
         const cedulas = data.map(user => user.cedula)

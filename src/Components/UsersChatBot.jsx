@@ -14,16 +14,27 @@ function useFilters ({ usuarios }) {
   return { userfiltrados, setFilterUsers }
 }
 
-export function UserChatBotMultired () {
+// eslint-disable-next-line react/prop-types
+export function UserChatBot ({ select }) {
   const [usuarios, setUsuarios] = useState([])
   const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
-  const { signalUser } = useContext(UserContext)
+  const { signalUser, setCompany } = useContext(UserContext)
+
+  function Seleccionado (empresa) {
+    if (empresa === 'Servired') {
+      setCompany('Servired')
+      return 'clientesServired'
+    } else if (empresa === 'Multired') {
+      setCompany('Multired')
+      return 'clientes'
+    }
+  }
 
   const getDataUsers = async () => {
     setLoading(true)
     try {
-      const response = await fetch('http://localhost:6060/clientes')
+      const response = await fetch(`http://localhost:6060/${Seleccionado(select)}`)
       if (response.status === 200) {
         const data = await response.json()
         const cedulas = data.map(user => user.cedula)
