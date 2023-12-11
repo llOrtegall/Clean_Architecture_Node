@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { UserProvider } from './context/UserContext.jsx'
 
-axios.defaults.baseURL = 'http://localhost:6060'
+axios.defaults.baseURL = 'http://172.20.1.160:3000'
 
 export function App () {
   const { login, loggedIn } = useAuth()

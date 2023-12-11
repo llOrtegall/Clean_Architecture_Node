@@ -34,12 +34,12 @@ export function UserChatBot ({ select }) {
   const getDataUsers = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`http://localhost:6060/${Seleccionado(select)}`)
+      const response = await fetch(`http://172.20.1.160:3000/${Seleccionado(select)}`)
       if (response.status === 200) {
         const data = await response.json()
         const cedulas = data.map(user => user.cedula)
 
-        const response2 = await fetch('http://localhost:6060/getCF', {
+        const response2 = await fetch('http://172.20.1.160:3000/getCF', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

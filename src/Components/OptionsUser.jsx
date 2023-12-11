@@ -172,6 +172,7 @@ export function EditarClienteChat ({ client }) {
 export function SolicitarEliminacion ({ client }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
+  const { setSignalUser, setUsuario } = useContext(UserContext)
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -186,7 +187,8 @@ export function SolicitarEliminacion ({ client }) {
         setResponseOk(res.status)
         setLoading(false)
         setTimeout(() => {
-          window.location.reload()
+          setSignalUser(prevState => !prevState)
+          setUsuario(null)
         }, 1500)
       })
       .catch(err => {
