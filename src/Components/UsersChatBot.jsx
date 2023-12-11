@@ -1,8 +1,8 @@
 import { UserContext } from '../context/UserContext.jsx'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { RenderUsers } from './RenderUsers.jsx'
 import { Loading } from './IconSvg.jsx'
-import axios from 'axios'
+import { useAuth } from '../Auth/AuthContext.jsx'
 
 function useFilters ({ usuarios }) {
   const [filterUsers, setFilterUsers] = useState('Ninguno')
@@ -19,29 +19,93 @@ export function UserChatBot () {
   const [usuarios, setUsuarios] = useState([])
   const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
+  const { user } = useAuth()
   const { signalUser } = useContext(UserContext)
 
-  useEffect(() => {
+  const { empresa } = user
+
+  const handleSelect = async (ev) => {
+    const { value } = ev.target
+    if (value === 'Multired') {
+      await getDataEmpresaMultired()
+    } else if (value === 'Servired') {
+      await getDataEmpresaServired()
+    } else if (value === 'Multired y Servired') {
+      setLoading(false)
+    }
+  }
+
+  const getDataEmpresaMultired = async () => {
     setLoading(true)
-    axios.get('/clientesServired')
-      .then((response) => {
-        const fetchedUsers = response.data
-        const cedulas = fetchedUsers.map(user => user.cedula)
-        axios.post('/getCF', { ccs: cedulas })
-          .then(response => {
-            const updatedUsers = fetchedUsers.map((user, index) => ({
-              ...user,
-              ...response.data[index]
-            }))
-            setUsuarios(updatedUsers)
-            setLoading(false)
-          })
-      })
-      .catch((error) => {
-        console.log(error)
-        setLoading(false)
-      })
-  }, [signalUser])
+    try {
+      const response = await fetch('http://localhost:6060/clientes')
+      if (response.status === 200) {
+        const data = await response.json()
+        const cedulas = data.map(user => user.cedula)
+
+        const response2 = await fetch('http://localhost:6060/getCF', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ccs: cedulas })
+        })
+
+        if (response2.status === 200) {
+          const data2 = await response2.json()
+          const updatedUsers = data.map((user, index) => ({
+            ...user,
+            ...data2[index]
+          }))
+          setUsuarios(updatedUsers)
+          setLoading(false)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getDataEmpresaServired = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch('http://localhost:6060/clientesServired')
+      if (response.status === 200) {
+        const data = await response.json()
+        const cedulas = data.map(user => user.cedula)
+
+        const response2 = await fetch('http://localhost:6060/getCF', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ ccs: cedulas })
+        })
+
+        if (response2.status === 200) {
+          const data2 = await response2.json()
+          const updatedUsers = data.map((user, index) => ({
+            ...user,
+            ...data2[index]
+          }))
+          setUsuarios(updatedUsers)
+          setLoading(false)
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (empresa === 'Multired y Servired') {
+      setLoading(false)
+    } else if (empresa === 'Multired') {
+      getDataEmpresaMultired()
+    } else if (empresa === 'Servired') {
+      getDataEmpresaServired()
+    }
+  }, [])
 
   const handleFilter = (ev) => {
     setFilterUsers(ev.target.value)
@@ -53,26 +117,37 @@ export function UserChatBot () {
 
   return (
     <>
-      <h1 className='text-center bg-blue-500 text-white font-bold py-2 rounded-lg'>Usuarios Registrados Por Chat Boot</h1>
-        <table className='text-center'>
-          <tr>
-            <th>N°</th>
-            <th>Nombre</th>
-            <th>Cedula</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-            <th>Fecha de Registro</th>
-            <th>Estado
-              <select id="estado" onChange={ev => handleFilter(ev)} className='ml-3 rounded-md text-black'>
-                <option value="Ninguno" className='text-black' selected>Ninguno</option>
-                <option value="No Existe" className='text-black'>No Existe</option>
-                <option value="Si Existe" className='text-black'>Si Existe</option>
+      <h1 className='text-center bg-blue-500 text-white font-bold py-2 rounded-lg flex items-center justify-center'>
+        Usuarios Registrados Por Chat Boot
+        {
+          empresa === 'Multired y Servired'
+            ? <select className='ml-6 text-black' onChange={handleSelect}>
+                <option >Seleccione Empresa</option>
+                <option value='Servired'>Servired</option>
+                <option value='Multired'>Multired</option>
               </select>
-            </th>
-            <th>Opc Usuario</th>
-          </tr>
-            <RenderUsers usuarios={userfiltrados(usuarios)}/>
-        </table>
+            : null
+        }
+      </h1>
+      <table className='text-center'>
+        <tr>
+          <th>N°</th>
+          <th>Nombre</th>
+          <th>Cedula</th>
+          <th>Correo</th>
+          <th>Telefono</th>
+          <th>Fecha de Registro</th>
+          <th>Estado
+            <select id="estado" onChange={ev => handleFilter(ev)} className='ml-3 rounded-md text-black'>
+              <option value="Ninguno" className='text-black' selected>Ninguno</option>
+              <option value="No Existe" className='text-black'>No Existe</option>
+              <option value="Si Existe" className='text-black'>Si Existe</option>
+            </select>
+          </th>
+          <th>Opc Usuario</th>
+        </tr>
+        <RenderUsers usuarios={userfiltrados(usuarios)} />
+      </table>
     </>
   )
 }

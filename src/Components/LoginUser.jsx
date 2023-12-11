@@ -1,23 +1,11 @@
 import { ChangedPassword } from './ChangedPassword.jsx'
 import { UserIcon, CloseSession } from './IconSvg.jsx'
 import { useAuth } from '../Auth/AuthContext.jsx'
-import { getCookie } from '../services/getToken.js'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useState } from 'react'
 
 export function LoginUser () {
   const [showChangePasword, setShowChangePasword] = useState(false)
-  const [user, setUser] = useState({})
-  const { logout } = useAuth()
-
-  useEffect(() => {
-    const token = getCookie('token')
-    axios.get('/profile', {
-      headers: { Authorization: `Bearer ${token}` }
-    }).then(res => {
-      setUser(res.data.user)
-    })
-  }, [])
+  const { logout, user } = useAuth()
 
   const { id, nombres, apellidos, username, correo, proceso, rol } = user
 

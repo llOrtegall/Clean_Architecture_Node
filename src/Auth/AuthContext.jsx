@@ -18,8 +18,6 @@ export function AuthProvider ({ children }) {
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   }
 
-  console.log(user)
-
   return (
     <AuthContext.Provider value={{ loggedIn, user, login, logout }}>
       {children}
