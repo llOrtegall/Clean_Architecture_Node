@@ -18,34 +18,37 @@ export const LoginForm = () => {
         const { data } = response
         document.cookie = `token=${data.token}`
         const user = await GetUserCookie(data.token)
-        console.log(user)
         login(data.auth, user)
       }
-
-      // if (response.status === 400 || response.status === 401) {
-      //   const data = await response.json()
-      //   setError(data.error)
-      //   setTimeout(() => setError(null), 3000)
-      // }
     } catch (error) {
-      if (error) throw new Error(error)
-      console.log(error)
+      if (error.message === 'Network Error') {
+        return setError('Servidor No Disponible y/o Error De Conexión, Consulte Con El Administrador')
+      }
+      setError(error.response.data.error)
+    } finally {
+      setTimeout(() => {
+        setError(null)
+      }, 5000)
     }
   }
 
   return (
-    <section className='w-screen h-screen flex flex-col items-center justify-center relative fondo'>
-      <form onSubmit={handleSubmit} className='bg-white w-96 h-2/3 rounded-xl p-12 shadow-2xl relative flex flex-col gap-8 justify-between'>
-        <h1 className='text-orange-600 font-bold text-3xl text-center'>ChatBot Validator</h1>
-        <br />
+    <section className='w-full h-screen flex items-center justify-center fondo relative'>
+      <form onSubmit={handleSubmit}
+        className='flex flex-col w-96 h-2/3 bg-white rounded-2xl shadow-2xl px-10 justify-around'>
+        <h1 className='text-orange-600 font-bold text-3xl text-center pt-8 pb-6'>ChatBot Validator</h1>
         <input type='text' placeholder='Usuario | Eje: CP1118333444'
-          className='border-b-2 p-2' required
+          className='border-b-2 p-2'
           onChange={ev => setUsername(ev.target.value)} />
-        <input type='password' placeholder='Contraseña | Eje: CP***' className='border-b-2 p-2' required
+        <input type='password' placeholder='Contraseña | Eje: CP***' className='border-b-2 p-2'
           onChange={ev => setPassword(ev.target.value)} />
         <a className='text-orange-500 text-sm font-semibold text-end pt-2 pb-4'>Olvidaste tu contraseña</a>
         <button className='bg-orange-400 w-full rounded-lg p-3 text-white text-sm shadow-md hover:bg-green-100 hover:text-black'>Iniciar Sesión</button>
-        {error ? <p className='absolute bottom-24 left-28 text-red-600 font-semibold'>{error}</p> : null}
+
+        {error
+          ? <p className='absolute right-0 left-0 lg:bottom-10 2xl:bottom-28 text-red-600 font-semibold text-center'>{error}</p>
+          : null
+        }
 
       </form>
     </section>

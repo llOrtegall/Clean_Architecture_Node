@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .fondo {
-  background: url(/public/fondo.jpg);
+  background: url(/fondo.jpg);
   background-size: cover;
   background-position: center;
 }

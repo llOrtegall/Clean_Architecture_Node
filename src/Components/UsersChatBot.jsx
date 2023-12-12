@@ -3,6 +3,7 @@ import { UserContext } from '../context/UserContext.jsx'
 import { RenderUsers } from './RenderUsers.jsx'
 import { Loading } from './IconSvg.jsx'
 import { API } from '../App.jsx'
+import axios from 'axios'
 
 function useFilters ({ usuarios }) {
   const [filterUsers, setFilterUsers] = useState('Ninguno')
@@ -35,28 +36,18 @@ export function UserChatBot ({ select }) {
   const getDataUsers = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`${API}/${Seleccionado(select)}`)
+      const response = await axios.get(`/${Seleccionado(select)}`)
       if (response.status === 200) {
-        const data = await response.json()
+        const data = response.data
         const cedulas = data.map(user => user.cedula)
-
-        const response2 = await fetch(`${API}/getCF`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ ccs: cedulas })
-        })
-
-        if (response2.status === 200) {
-          const data2 = await response2.json()
-          const updatedUsers = data.map((user, index) => ({
-            ...user,
-            ...data2[index]
-          }))
-          setUsuarios(updatedUsers)
-          setLoading(false)
-        }
+        const response2 = await axios.post(`${API}/getCF`, { ccs: cedulas })
+        const data2 = response2.data
+        const updatedUsers = data.map((user, index) => ({
+          ...user,
+          ...data2[index]
+        }))
+        setUsuarios(updatedUsers)
+        setLoading(false)
       }
     } catch (error) {
       console.log(error)

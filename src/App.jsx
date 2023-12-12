@@ -6,7 +6,7 @@ import { useAuth } from './Auth/AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
 
-export const API = 'http://127.0.0.1:6060'
+export const API = 'http://172.20.1.160:3000'
 
 // TODO: Definir variables de API
 axios.defaults.baseURL = API
@@ -18,18 +18,12 @@ export function App () {
     const getLoggedIn = async () => {
       try {
         const token = getCookie('token')
-        const result = await fetch(`${API}/profile`, {
+        const response = await axios.get('/profile', {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
         })
-        if (result.status === 200) {
-          const usuario = await result.json()
-          login(usuario.auth, usuario.user)
-        }
-        if (result.status === 401) {
-          login(false)
-        }
+        const usuario = await response.data
+        login(usuario.auth, usuario.user)
       } catch (error) {
-        if (error) throw new Error(error)
         console.log(error)
       }
     }

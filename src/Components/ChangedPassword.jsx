@@ -1,13 +1,16 @@
+import { useAuth } from '../Auth/AuthContext'
+import { CloseIcon } from './IconSvg'
 import { useState } from 'react'
 import axios from 'axios'
-import { useAuth } from '../Auth/AuthContext'
 
 // eslint-disable-next-line react/prop-types
-export function ChangedPassword ({ username }) {
+export function ChangedPassword ({ username, close }) {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const { logout } = useAuth()
+
+  const handleShowChangePassword = close
 
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
@@ -37,6 +40,11 @@ export function ChangedPassword ({ username }) {
 
   return (
     <section className='bg-slate-600 shadow-2xl w-96 h-96 p-4 rounded-lg flex items-center justify-center'>
+      <button
+        className='absolute top-2 right-5 hover:bg-red-500 rounded-full text-white'
+        onClick={handleShowChangePassword}>
+        <CloseIcon />
+      </button>
       <form onSubmit={handleChangePassword} className='flex flex-col items-center'>
         <h2 className='text-center text-xl font-bold uppercase text-white'> Cambiar Contraseña </h2>
         <p className='py-2 font-bold text-yellow-300'>Usuario: <span className='text-green-400'>{username}</span></p>
