@@ -1,12 +1,15 @@
+import { UserProvider } from './context/UserContext.jsx'
 import { LoginForm } from './Components/LoginForm'
 import { DashBoard } from './Components/DashBoard'
 import { getCookie } from './services/getToken.js'
 import { useAuth } from './Auth/AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
-import { UserProvider } from './context/UserContext.jsx'
 
-axios.defaults.baseURL = 'http://172.20.1.160:3000'
+export const API = 'http://127.0.0.1:6060'
+
+// TODO: Definir variables de API
+axios.defaults.baseURL = API
 
 export function App () {
   const { login, loggedIn } = useAuth()
@@ -15,7 +18,7 @@ export function App () {
     const getLoggedIn = async () => {
       try {
         const token = getCookie('token')
-        const result = await fetch('http://172.20.1.160:3000/profile', {
+        const result = await fetch(`${API}/profile`, {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
         })
         if (result.status === 200) {

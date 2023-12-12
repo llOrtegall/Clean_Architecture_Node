@@ -1,11 +1,12 @@
+import axios from 'axios'
+
 export const GetUserCookie = async (token) => {
-  const response = await fetch('http://172.20.1.160:3000/profile', {
-    method: 'GET',
+  const response = await axios.get('/profile', {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     }
   })
-  const { user } = await response.json()
+  const { user } = response.data
   return user
 }

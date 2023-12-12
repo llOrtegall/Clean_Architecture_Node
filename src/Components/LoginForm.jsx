@@ -1,6 +1,7 @@
+import { GetUserCookie } from '../services/getUser.js'
 import { useAuth } from '../Auth/AuthContext.jsx'
 import { useState } from 'react'
-import { GetUserCookie } from '../services/getUser.js'
+import axios from 'axios'
 
 export const LoginForm = () => {
   const [username, setUsername] = useState('')
@@ -12,23 +13,20 @@ export const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://172.20.1.160:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user: username, password })
-      })
+      const response = await axios.post('/login', { user: username, password })
       if (response.status === 200) {
-        const result = await response.json()
-        document.cookie = `token=${result.token}`
-        const user = await GetUserCookie(result.token)
-        login(result.auth, user)
+        const { data } = response
+        document.cookie = `token=${data.token}`
+        const user = await GetUserCookie(data.token)
+        console.log(user)
+        login(data.auth, user)
       }
 
-      if (response.status === 400 || response.status === 401) {
-        const data = await response.json()
-        setError(data.error)
-        setTimeout(() => setError(null), 3000)
-      }
+      // if (response.status === 400 || response.status === 401) {
+      //   const data = await response.json()
+      //   setError(data.error)
+      //   setTimeout(() => setError(null), 3000)
+      // }
     } catch (error) {
       if (error) throw new Error(error)
       console.log(error)

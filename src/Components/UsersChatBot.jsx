@@ -1,7 +1,8 @@
-import { UserContext } from '../context/UserContext.jsx'
 import { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../context/UserContext.jsx'
 import { RenderUsers } from './RenderUsers.jsx'
 import { Loading } from './IconSvg.jsx'
+import { API } from '../App.jsx'
 
 function useFilters ({ usuarios }) {
   const [filterUsers, setFilterUsers] = useState('Ninguno')
@@ -34,12 +35,12 @@ export function UserChatBot ({ select }) {
   const getDataUsers = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`http://172.20.1.160:3000/${Seleccionado(select)}`)
+      const response = await fetch(`${API}/${Seleccionado(select)}`)
       if (response.status === 200) {
         const data = await response.json()
         const cedulas = data.map(user => user.cedula)
 
-        const response2 = await fetch('http://172.20.1.160:3000/getCF', {
+        const response2 = await fetch(`${API}/getCF`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

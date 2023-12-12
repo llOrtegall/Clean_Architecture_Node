@@ -7,6 +7,7 @@ import { UserChatBot } from './UsersChatBot.jsx'
 // eslint-disable-next-line react/prop-types
 export function DashBoard () {
   const { user, setCompany } = useAuth()
+
   const { empresa } = user
   const [selectedEmpresa, setSelectedEmpresa] = useState(empresa)
 
