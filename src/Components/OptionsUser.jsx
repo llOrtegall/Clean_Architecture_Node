@@ -4,14 +4,17 @@ import { separarNombre } from '../services/funtionsReutilizables'
 import { UserContext } from '../context/UserContext'
 
 // eslint-disable-next-line react/prop-types
-export function CrearClienteFiel ({ client }) {
+export function CrearClienteFiel ({ client, emp }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const [loading, setLoading] = useState(false)
   const [userOk, setUserOk] = useState('')
   const [messageError, setMessageError] = useState('')
   const [selectedValue, setSelectedValue] = useState(null)
-  const { company, setUsuario, setSignalUser } = useContext(UserContext)
+  const { setUsuario, setSignalUser } = useContext(UserContext)
+  const company = emp
+
+  console.log(company)
 
   const handleChange = (ev) => {
     setSelectedValue(ev.target.value)
@@ -28,12 +31,14 @@ export function CrearClienteFiel ({ client }) {
     setLoading(true)
     axios.post('/newCF', { cedula, nombre, telefono, correo, sexo: selectedValue, empresa: company })
       .then(res => {
-        setUserOk('Usuario creado con exito')
-        setLoading(false)
-        setTimeout(() => {
-          setUsuario(null)
-          setSignalUser(false)
-        }, 1500)
+        if (res.status === 201) {
+          setUserOk('Usuario creado con exito')
+          setLoading(false)
+          setTimeout(() => {
+            setUsuario(null)
+            setSignalUser(prevState => !prevState)
+          }, 1500)
+        }
       })
       .catch(err => {
         setLoading(false)
@@ -85,8 +90,6 @@ export function EditarClienteChat ({ client, emp }) {
   const [status, setStatus] = useState(null)
   const { setSignalUser, setUsuario } = useContext(UserContext)
 
-  console.log(emp)
-
   // eslint-disable-next-line react/prop-types
   function StatusMessage ({ status }) {
     if (status === 'loading') {
@@ -111,19 +114,11 @@ export function EditarClienteChat ({ client, emp }) {
     }))
   }
 
-  function Seleccionado (emp) {
-    if (emp === 'Servired') {
-      return '/clienteServired'
-    } else if (emp === 'Multired') {
-      return '/cliente'
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('loading')
     try {
-      const res = await axios.put(`${Seleccionado(emp)}`, { updateUser })
+      const res = await axios.put('cliente', { updateUser, emp })
       if (res.status === 200) {
         setStatus('success')
         setTimeout(() => {
@@ -169,7 +164,7 @@ export function EditarClienteChat ({ client, emp }) {
 }
 
 // eslint-disable-next-line react/prop-types
-export function SolicitarEliminacion ({ client }) {
+export function SolicitarEliminacion ({ client, emp }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const { setSignalUser, setUsuario } = useContext(UserContext)
@@ -181,7 +176,7 @@ export function SolicitarEliminacion ({ client }) {
 
   const sendCreateClient = () => {
     setLoading(true)
-    axios.post('/reportClient', { client, motivo })
+    axios.post('/reportClient', { client, motivo, emp })
       .then(res => {
         console.log(res)
         setResponseOk(res.status)

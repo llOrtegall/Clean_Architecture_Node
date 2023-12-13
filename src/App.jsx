@@ -6,7 +6,7 @@ import { useAuth } from './Auth/AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
 
-export const API = 'http://localhost:6060'
+export const API = 'http://172.20.1.160:3000'
 
 // TODO: Definir variables de API
 axios.defaults.baseURL = API

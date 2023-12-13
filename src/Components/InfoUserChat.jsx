@@ -10,8 +10,6 @@ export function InfoUserChat ({ emp }) {
   const { usuario } = useContext(UserContext)
   const empresa = emp
 
-  console.log(empresa)
-
   const closeComponent = () => {
     setActiveComponent(null)
   }
