@@ -5,7 +5,6 @@ const AuthContext = createContext()
 // eslint-disable-next-line react/prop-types
 export function AuthProvider ({ children }) {
   const [loggedIn, setLoggedIn] = useState(false)
-  const [company, setCompany] = useState(null)
   const [user, setUser] = useState({})
   const login = (auth, user) => {
     if (auth === true) {
@@ -21,7 +20,7 @@ export function AuthProvider ({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ loggedIn, user, login, logout, company, setCompany }}>
+    <AuthContext.Provider value={{ loggedIn, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

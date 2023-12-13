@@ -77,15 +77,15 @@ export function CrearClienteFiel ({ client }) {
 }
 
 // eslint-disable-next-line react/prop-types
-export function EditarClienteChat ({ client }) {
+export function EditarClienteChat ({ client, emp }) {
   // eslint-disable-next-line react/prop-types
   const { cedula, nombre, telefono, correo } = client
   const { nombre1, nombre2, apellido1, apellido2 } = separarNombre(nombre)
   const [updateUser, setUpdateUser] = useState({})
   const [status, setStatus] = useState(null)
-  const { company, setSignalUser, setUsuario } = useContext(UserContext)
+  const { setSignalUser, setUsuario } = useContext(UserContext)
 
-  const emp = company
+  console.log(emp)
 
   // eslint-disable-next-line react/prop-types
   function StatusMessage ({ status }) {

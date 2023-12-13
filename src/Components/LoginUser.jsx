@@ -3,10 +3,10 @@ import { UserIcon, CloseSession } from './IconSvg.jsx'
 import { useAuth } from '../Auth/AuthContext.jsx'
 import { useState } from 'react'
 
-export function LoginUser () {
+// eslint-disable-next-line react/prop-types
+export function LoginUser ({ emp }) {
   const [showChangePasword, setShowChangePasword] = useState(false)
-  const { logout, user, company } = useAuth()
-
+  const { logout, user } = useAuth()
   const { id, nombres, apellidos, username, correo, proceso, rol } = user
 
   const handleShowChangePassword = () => {
@@ -20,7 +20,8 @@ export function LoginUser () {
           <UserIcon />
           <section>
             <h3 className='font-semibold'>
-              Bienvenid@ <span className='pl-2'>{nombres}</span><span> {apellidos} --- </span> Empresa: { company !== null || undefined ? <span className='font-bold pl-2'>{company}</span> : null}
+              Bienvenid@ <span className='pl-2'>{nombres}</span><span> {apellidos} --- </span>
+              Empresa: { emp !== null || undefined ? <span className='font-bold pl-2'>{emp}</span> : null}
             </h3>
             <div className='flex'>
               <p className='small-text'>Usuario: <span className='font-bold pr-2'>{username}</span>  Correo: <span className='font-semibold lowercase'>{correo} </span></p>

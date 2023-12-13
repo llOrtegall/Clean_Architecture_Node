@@ -21,22 +21,16 @@ export function UserChatBot ({ select }) {
   const [usuarios, setUsuarios] = useState([])
   const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
-  const { signalUser, setCompany } = useContext(UserContext)
-
-  function Seleccionado (empresa) {
-    if (empresa === 'Servired') {
-      setCompany('Servired')
-      return 'clientesServired'
-    } else if (empresa === 'Multired') {
-      setCompany('Multired')
-      return 'clientes'
-    }
-  }
+  const { signalUser } = useContext(UserContext)
 
   const getDataUsers = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`/${Seleccionado(select)}`)
+      const response = await axios.get('/clientes', {
+        params: {
+          select
+        }
+      })
       if (response.status === 200) {
         const data = response.data
         const cedulas = data.map(user => user.cedula)

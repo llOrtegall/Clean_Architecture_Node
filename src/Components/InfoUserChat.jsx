@@ -5,18 +5,21 @@ import { EditarClienteChat, CrearClienteFiel, SolicitarEliminacion } from './Opt
 import { UserContext } from '../context/UserContext'
 
 // eslint-disable-next-line react/prop-types
-export function InfoUserChat () {
+export function InfoUserChat ({ emp }) {
   const [activeComponent, setActiveComponent] = useState(null)
   const { usuario } = useContext(UserContext)
+  const empresa = emp
+
+  console.log(empresa)
 
   const closeComponent = () => {
     setActiveComponent(null)
   }
 
   const components = {
-    EditarClienteChat: <EditarClienteChat client={usuario} funClose={closeComponent} />,
-    CrearClienteFiel: <CrearClienteFiel client={usuario} funClose={closeComponent} />,
-    SolicitarEliminacion: <SolicitarEliminacion client={usuario} funClose={closeComponent} />
+    EditarClienteChat: <EditarClienteChat client={usuario} emp={empresa} funClose={closeComponent} />,
+    CrearClienteFiel: <CrearClienteFiel client={usuario} emp={empresa} funClose={closeComponent} />,
+    SolicitarEliminacion: <SolicitarEliminacion client={usuario} emp={empresa} funClose={closeComponent} />
   }
 
   const handleButtonClick = (componentName) => {
