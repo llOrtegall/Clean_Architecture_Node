@@ -19,3 +19,7 @@ th {
 tr:nth-child(even) {
   @apply bg-blue-200 border
 }
+
+.change_password{
+  @apply absolute 2xl:right-1/4 xl:right-96 lg:right-80
+}

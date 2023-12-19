@@ -4,7 +4,7 @@ import { useAuth } from '../Auth/AuthContext.jsx'
 import { useState } from 'react'
 
 // eslint-disable-next-line react/prop-types
-export function LoginUser ({ emp }) {
+export function LoginUser({ emp }) {
   const [showChangePasword, setShowChangePasword] = useState(false)
   const { logout, user } = useAuth()
   const { id, nombres, apellidos, username, correo, proceso, rol } = user
@@ -14,38 +14,39 @@ export function LoginUser ({ emp }) {
   }
 
   return (
-    <>
-      <nav className='flex items-center justify-between bg-slate-600 m-2 px-4 py-6 mx rounded-xl text-white relative'>
-        <figure className='flex items-center'>
+    <nav className='bg-slate-600 m-2 rounded-md p-2'>
+      <section className='text-white rounded-md'>
+        <div className='flex text-xs text-center justify-around border py-1 rounded-md my-1'>
           <UserIcon />
-          <section>
-            <h3 className='font-semibold'>
-              Bienvenid@ <span className='pl-2'>{nombres}</span><span> {apellidos} --- </span>
-              Empresa: { emp !== null || undefined ? <span className='font-bold pl-2'>{emp}</span> : null}
-            </h3>
-            <div className='flex'>
-              <p className='small-text'>Usuario: <span className='font-bold pr-2'>{username}</span>  Correo: <span className='font-semibold lowercase'>{correo} </span></p>
-            </div>
-            <div className='flex justify-between'>
-              <p>Proceso: <span className='font-bold pr-2'>{proceso}</span></p> <p>Cargo: <span className='font-bold pr-2'>{rol}</span></p> <p>ID: <span className='font-bold pr-2'>{id}</span></p>
-            </div>
-          </section>
-        </figure>
+          <p className='flex flex-col'>Bienvenid@ <span className='font-semibold'>{nombres} {apellidos} </span></p>
+          <p className='flex flex-col'>Empresa: {emp !== null || undefined ? <span className='font-semibold'>{emp}</span> : null}</p>
+        </div>
+        <div className='flex text-xs text-center justify-around border py-1 rounded-md my-1'>
+          <p className='flex flex-col'>Usuario: <span className='font-semibold'>{username}</span></p>
+          <p className='flex flex-col'>Proceso: <span className='font-semibold'>{proceso}</span></p>
+          <p className='flex flex-col'>Cargo: <span className='font-semibold'>{rol}</span></p>
+        </div>
+        <div className='flex flex-col text-xs border py-1 rounded-md my-1'>
+          <p className='flex gap-10 justify-around'> Correo: <span className='font-semibold'>{correo} </span></p>
+          <p className='flex gap-10 justify-around'>ID: <span className='font-semibold'>{id}</span></p>
+        </div>
+      </section>
 
-        <button onClick={handleShowChangePassword} className='bg-blue-400 p-3 font-bold rounded-md hover:bg-green-200 hover:text-gray-700'>
+      <div className='flex justify-between'>
+        <button onClick={handleShowChangePassword} className='w-42 p-2 bg-blue-400 rounded-md text-white font-semibold border'>
           Cambiar Contraseña
         </button>
 
-        <button id='close-session' className='flex flex-col items-center text-center' onClick={logout}>
+        <button onClick={logout} className='w-42 text-white text-center flex items-center justify-center px-2 py-1 border rounded-md'>
           <CloseSession />
-          <p>Cerrar Sesión</p>
+          Cerrar Sesión
         </button>
+      </div>
 
-      </nav>
-      <section className='absolute 2xl:right-1/4 xl:right-96 lg:right-80'>
-        {showChangePasword === true ? <ChangedPassword username={username} close={handleShowChangePassword}/> : null}
+      <section className=''>
+        {showChangePasword === true ? <ChangedPassword username={username} close={handleShowChangePassword} /> : null}
       </section>
-    </>
 
+    </nav>
   )
 }
