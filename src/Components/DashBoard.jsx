@@ -33,7 +33,7 @@ export function DashBoard () {
       <section>
         <LoginUser emp={companyState}/>
       </section>
-      <section className='w-full flex flex-col px-2 h-96 overflow-auto'>
+      <section className='w-full flex flex-col px-2 h-100 overflow-auto'>
         {companyState !== 'Multired y Servired' ? <UserChatBot select={companyState}/> : defineCompany()}
       </section>
       <section >

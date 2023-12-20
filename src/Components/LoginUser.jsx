@@ -40,7 +40,7 @@ export function LoginUser ({ emp }) {
             <p className='grid w-full '>Cargo: <span className='font-bold'>{rol}</span></p>
           </div>
 
-          <div className='w-full border rounded-md p-1 text-center justify-between items-center xl:flex xl:flex-col xl:p-4 xl:col-span-3'>
+          <div className='w-full border rounded-md text-center justify-center xl:flex xl:flex-col xl:col-span-3'>
             <p> Correo: <span className='font-bold'>{correo} </span></p>
             <p>ID: <span className='font-bold'>{id}</span></p>
           </div>
