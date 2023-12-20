@@ -19,7 +19,7 @@ export function LoginUser ({ emp }) {
   }
 
   return (
-    <nav className='bg-slate-600 m-2 p-2 rounded-md text-white'>
+    <nav className='bg-slate-600 m-2 p-2 rounded-md text-white relative'>
 
       <section className='grid gap-2 text-xs xl:grid-cols-12 xl:text-base'>
 
@@ -67,7 +67,7 @@ export function LoginUser ({ emp }) {
 
       </section>
 
-      <section className='absolute'>
+      <section className='absolute top-0 right-0'>
         {showChangePasword === true ? <ChangedPassword username={username} close={handleShowChangePassword} /> : null}
       </section>
 

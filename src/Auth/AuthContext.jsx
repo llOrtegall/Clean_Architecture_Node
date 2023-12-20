@@ -15,8 +15,8 @@ export function AuthProvider ({ children }) {
   const logout = () => {
     setLoggedIn(false)
     setUser({})
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/chat_bot;'
+    document.cookie = 'chat_bot=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    document.cookie = 'chat_bot=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/chat_bot;'
   }
 
   return (

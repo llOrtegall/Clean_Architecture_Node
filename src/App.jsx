@@ -17,7 +17,7 @@ export function App () {
   useEffect(() => {
     const getLoggedIn = async () => {
       try {
-        const token = getCookie('token')
+        const token = getCookie('chat_bot')
         const response = await axios.get('/profile', {
           headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
         })

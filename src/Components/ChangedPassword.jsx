@@ -39,7 +39,7 @@ export function ChangedPassword ({ username, close }) {
   }
 
   return (
-    <section className='bg-slate-600 shadow-2xl w-96 h-96 p-4 rounded-lg flex items-center justify-center'>
+    <section className='bg-slate-600 shadow-2xl w-96 h-96 p-2 rounded-lg flex items-center justify-center'>
       <button
         className='absolute top-2 right-5 hover:bg-red-500 rounded-full text-white'
         onClick={handleShowChangePassword}>

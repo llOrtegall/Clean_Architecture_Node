@@ -16,7 +16,7 @@ export const LoginForm = () => {
       const response = await axios.post('/login', { user: username, password })
       if (response.status === 200) {
         const { data } = response
-        document.cookie = `token=${data.token}`
+        document.cookie = `chat_bot=${data.token}`
         const user = await GetUserCookie(data.token)
         login(data.auth, user)
       }
