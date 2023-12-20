@@ -5,7 +5,7 @@ import { Loading } from './IconSvg.jsx'
 import { API } from '../App.jsx'
 import axios from 'axios'
 
-function useFilters ({ usuarios }) {
+function useFilters({ usuarios }) {
   const [filterUsers, setFilterUsers] = useState('Ninguno')
   const userfiltrados = () => {
     if (filterUsers === 'Ninguno') return usuarios
@@ -17,7 +17,7 @@ function useFilters ({ usuarios }) {
 }
 
 // eslint-disable-next-line react/prop-types
-export function UserChatBot ({ select }) {
+export function UserChatBot({ select }) {
   const [usuarios, setUsuarios] = useState([])
   const { userfiltrados, setFilterUsers } = useFilters({ usuarios })
   const [loading, setLoading] = useState(true)
@@ -66,7 +66,7 @@ export function UserChatBot ({ select }) {
         Usuarios Registrados Por Chat Boot
       </h1>
       <table className='text-center'>
-        <tr>
+        <tr className=''>
           <th>N°</th>
           <th>Nombre</th>
           <th>Cedula</th>

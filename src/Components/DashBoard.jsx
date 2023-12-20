@@ -31,13 +31,13 @@ export function DashBoard () {
   return (
     <main className='w-full'>
       <section>
-        <LoginUser emp={companyState}/>
+        <LoginUser emp={companyState} />
       </section>
       <section className='w-full flex flex-col px-2 h-100 overflow-auto'>
-        {companyState !== 'Multired y Servired' ? <UserChatBot select={companyState}/> : defineCompany()}
+        {companyState !== 'Multired y Servired' ? <UserChatBot select={companyState} /> : defineCompany()}
       </section>
       <section >
-        <InfoUserChat emp={companyState}/>
+        <InfoUserChat emp={companyState} />
       </section>
     </main>
   )
