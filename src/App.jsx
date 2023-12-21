@@ -9,7 +9,7 @@ import axios from 'axios'
 import { ForgotPassword } from './Components/ForgotPassword'
 import { ResetPassword } from './Components/ResetPassword'
 
-export const API = 'http://localhost:3000'
+export const API = 'http://172.20.1.160:3000'
 
 // TODO: Definir variables de API
 axios.defaults.baseURL = API
@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
   console.log(loggedIn)
 
   return !loggedIn
-    ? <Navigate to="/" />
+    ? <Navigate to="/chat_bot" />
     : children
 }
 
@@ -47,16 +47,17 @@ export function App () {
 
   return (
     <Routes>
-      <Route path='/' element={<LoginForm />} />
-      <Route path='/dashboard' element={
+      <Route path='/chat_bot' element={<LoginForm />} />
+      <Route path='/chat_bot/dashboard' element={
         <ProtectedRoute>
           <UserProvider>
             <DashBoard />
           </UserProvider>
         </ProtectedRoute>
       } />
-      <Route path='/forgot-password' element={<ForgotPassword />} />
-      <Route path='/resetPassword' element={<ResetPassword />} />
+      <Route path='/chat_bot/forgot-password' element={<ForgotPassword />} />
+      <Route path='/chat_bot/resetPassword' element={<ResetPassword />} />
+      <Route path='*' element={<Navigate to='/chat_bot' />} />
     </Routes>
   )
 }

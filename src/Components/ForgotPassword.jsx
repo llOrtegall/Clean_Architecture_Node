@@ -21,7 +21,7 @@ export function ForgotPassword () {
           setMessage('Se ha generado la solicitud para recuperar contraseña contacte al administrador del Sistema')
           setTimeout(() => {
             setLoading(false)
-            navigate('/resetPassword')
+            navigate('/chat_bot/resetPassword')
             setMessage('')
           }, 4500)
         }
@@ -50,7 +50,7 @@ export function ForgotPassword () {
         <button className="bg-blue-400 rounded-md mt-6 p-2 text-white font-semibold w-60 shadow-lg">
           Enviar
         </button>
-        <Link to='/' className='text-xs absolute bottom-2 right-2 text-orange-600 hover:underline' >Volver al inicio</Link>
+        <Link to='/chat_bot' className='text-xs absolute bottom-2 right-2 text-orange-600 hover:underline' >Volver al inicio</Link>
       </form>
       {error && <div className='absolute bottom-44 text-red-600 font-semibold'>{error}</div>}
       {message && <div className='absolute bottom-36 text-green-600 font-semibold'>{message}</div>}

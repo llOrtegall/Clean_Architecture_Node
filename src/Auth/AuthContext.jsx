@@ -19,7 +19,7 @@ export function AuthProvider ({ children }) {
     setUser({})
     document.cookie = 'chat_bot=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     document.cookie = 'chat_bot=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/chat_bot;'
-    navigate('/')
+    navigate('/chat_bot')
   }
 
   return (
