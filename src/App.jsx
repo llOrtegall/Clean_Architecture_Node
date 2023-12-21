@@ -6,6 +6,7 @@ import { getCookie } from './services/getToken'
 import { useAuth } from './Auth/AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { ForgotPassword } from './Components/ForgotPassword'
 
 export const API = 'http://localhost:3000'
 
@@ -53,7 +54,7 @@ export function App () {
           </UserProvider>
         </ProtectedRoute>
       } />
-      <Route path='/forgot-password' element={<h1>Olvidaste tu contraseña</h1>} />
+      <Route path='/forgot-password' element={<ForgotPassword />} />
     </Routes>
   )
 }
