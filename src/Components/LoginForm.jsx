@@ -1,8 +1,8 @@
 import { GetUserCookie } from '../services/getUser.js'
 import { useAuth } from '../Auth/AuthContext.jsx'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 export const LoginForm = () => {
   const [username, setUsername] = useState('')
@@ -10,6 +10,7 @@ export const LoginForm = () => {
   const [error, setError] = useState(null)
   const navigate = useNavigate()
   const { login } = useAuth()
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -44,15 +45,15 @@ export const LoginForm = () => {
             onChange={ev => setUsername(ev.target.value)} />
           <input type='password' placeholder='Contraseña | Eje: CP***' className='border-b-2 p-2'
             onChange={ev => setPassword(ev.target.value)} />
-          <button className='text-orange-500 text-sm font-semibold text-end pt-2 pb-4 hover:underline'>Olvidaste tu contraseña</button>
           <button className='bg-orange-400 w-full rounded-lg p-3 text-white text-sm shadow-md hover:bg-green-100 hover:text-black'>Iniciar Sesión</button>
 
           {error
             ? <p className='absolute right-0 left-0 lg:bottom-10 2xl:bottom-28 text-red-600 font-semibold text-center'>{error}</p>
             : null
           }
-
         </form>
+        <Link className='text-orange-500 text-sm font-semibold text-end pt-2 pb-4 hover:underline absolute bottom-64'
+          to='/forgot-password'> Olvidaste tu contraseña</Link>
       </section>
     </>
 

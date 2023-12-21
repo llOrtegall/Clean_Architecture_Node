@@ -18,6 +18,7 @@ export function App () {
           <DashBoard />
         </UserProvider>
       } />
+      <Route path='/forgot-password' element={<h1>Olvidaste tu contraseña</h1>} />
     </Routes>
   )
 }
