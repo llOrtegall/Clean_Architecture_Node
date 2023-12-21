@@ -7,6 +7,7 @@ import { useAuth } from './Auth/AuthContext'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { ForgotPassword } from './Components/ForgotPassword'
+import { ResetPassword } from './Components/ResetPassword'
 
 export const API = 'http://localhost:3000'
 
@@ -55,6 +56,7 @@ export function App () {
         </ProtectedRoute>
       } />
       <Route path='/forgot-password' element={<ForgotPassword />} />
+      <Route path='/resetPassword' element={<ResetPassword />} />
     </Routes>
   )
 }

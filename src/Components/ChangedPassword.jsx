@@ -49,17 +49,17 @@ export function ChangedPassword ({ username, close }) {
         <h2 className='text-center text-xl font-bold uppercase text-white'> Cambiar Contraseña </h2>
         <p className='py-2 font-bold text-yellow-300'>Usuario: <span className='text-green-400'>{username}</span></p>
         <input
-          type='password' className='p-2 my-2 rounded-md w-full shadow-md'
+          type='password' className='p-2 my-2 rounded-md w-full shadow-md text-black'
           value={oldPassword} onChange={(e) => setOldPassword(e.target.value)}
           placeholder='Contraseña Actual' required
         />
         <input
-          type='password' className='p-2 my-2 rounded-md w-full shadow-md'
+          type='password' className='p-2 my-2 rounded-md w-full shadow-md text-black'
           value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
           placeholder='Nueva Contraseña' required
         />
         <input
-          type='password' className='p-2 my-2 rounded-md w-full shadow-md'
+          type='password' className='p-2 my-2 rounded-md w-full shadow-md text-black'
           value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder='Confirmar Contraseña Nueva' required
         />
