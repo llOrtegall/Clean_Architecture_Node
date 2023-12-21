@@ -45,6 +45,8 @@ export const LoginForm = () => {
             onChange={ev => setUsername(ev.target.value)} />
           <input type='password' placeholder='Contraseña | Eje: CP***' className='border-b-2 p-2'
             onChange={ev => setPassword(ev.target.value)} />
+          <Link className='text-orange-500 text-sm font-semibold text-end pt-2 pb-4 hover:underline'
+            to='/forgot-password'> Olvidaste tu contraseña</Link>
           <button className='bg-orange-400 w-full rounded-lg p-3 text-white text-sm shadow-md hover:bg-green-100 hover:text-black'>Iniciar Sesión</button>
 
           {error
@@ -52,8 +54,7 @@ export const LoginForm = () => {
             : null
           }
         </form>
-        <Link className='text-orange-500 text-sm font-semibold text-end pt-2 pb-4 hover:underline absolute bottom-64'
-          to='/forgot-password'> Olvidaste tu contraseña</Link>
+
       </section>
     </>
 

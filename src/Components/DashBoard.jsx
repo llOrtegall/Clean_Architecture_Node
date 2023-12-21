@@ -1,32 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../Auth/AuthContext.jsx'
 import { InfoUserChat } from './InfoUserChat.jsx'
 import { LoginUser } from './LoginUser.jsx'
 import { UserChatBot } from './UsersChatBot.jsx'
-import { GetUserCookie } from '../services/getUser.js'
-import axios from 'axios'
 
 // eslint-disable-next-line react/prop-types
 export function DashBoard () {
   const { user } = useAuth()
   const { empresa } = user
-  const { login } = useAuth()
-
-  useEffect(() => {
-    const getLoggedIn = async () => {
-      try {
-        const token = GetUserCookie('chat_bot')
-        const response = await axios.get('/profile', {
-          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
-        })
-        const usuario = await response.data
-        login(usuario.auth, usuario.user)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getLoggedIn()
-  }, [])
 
   const [companyState, setCompanyState] = useState(empresa)
 

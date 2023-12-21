@@ -1,6 +1,8 @@
 import axios from 'axios'
 
 export const GetUserCookie = async (token) => {
+  console.log(token)
+
   const response = await axios.get('/profile', {
     headers: {
       'Content-Type': 'application/json',
