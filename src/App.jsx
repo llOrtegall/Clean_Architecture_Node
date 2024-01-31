@@ -8,7 +8,7 @@ import axios from 'axios'
 import { ForgotPassword } from './Components/ForgotPassword'
 import { ResetPassword } from './Components/ResetPassword'
 
-export const API = 'http://localhost:3000'
+export const API = 'http://172.20.1.160:3000'
 
 const ProtectedRoute = ({ children }) => {
   const { loggedIn } = useAuth()
