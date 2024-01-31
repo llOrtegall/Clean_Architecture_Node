@@ -1,4 +1,3 @@
-import { GetUserCookie } from '../services/getUser.js'
 import { useAuth } from '../Auth/AuthContext.jsx'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -17,9 +16,7 @@ export const LoginForm = () => {
       const response = await axios.post('/login', { user: username, password })
       if (response.status === 200) {
         const { data } = response
-        document.cookie = `chat_bot=${data.token}`
-        const user = await GetUserCookie(data.token)
-        login(data.auth, user)
+        login(data.auth, data.UserLogin)
         navigate('/chat_bot/dashboard')
       }
     } catch (error) {

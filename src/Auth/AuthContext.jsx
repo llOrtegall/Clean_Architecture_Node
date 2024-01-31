@@ -8,17 +8,17 @@ export function AuthProvider ({ children }) {
   const [loggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate()
   const [user, setUser] = useState({})
+
   const login = (auth, user) => {
     if (auth === true) {
       setLoggedIn(true)
       setUser(user)
+      navigate('/chat_bot/dashboard')
     }
   }
   const logout = () => {
     setLoggedIn(false)
     setUser({})
-    document.cookie = 'chat_bot=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-    document.cookie = 'chat_bot=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/chat_bot;'
     navigate('/chat_bot')
   }
 
