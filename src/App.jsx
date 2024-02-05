@@ -25,10 +25,17 @@ export function App () {
   const { login } = useAuth()
 
   useEffect(() => {
-    axios.get('/profile').then(res => {
-      const { auth, UserLogin } = res.data
-      login(auth, UserLogin)
-    })
+    const token = localStorage.getItem('TokenChatBoot')
+    if (token) {
+      axios.get('/profile', { headers: { Authorization: `Bearer ${token}` } })
+        .then(res => {
+          if (res.status === 200) {
+            login(true, res.data)
+          } else {
+            console.log('No Token')
+          }
+        })
+    }
   }, [])
 
   return (

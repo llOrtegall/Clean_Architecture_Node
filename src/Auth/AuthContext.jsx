@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { createContext, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -18,13 +17,10 @@ export function AuthProvider ({ children }) {
     }
   }
   const logout = () => {
-    axios.post('/logout').then(res => {
-      if (res.status === 200) {
-        setLoggedIn(false)
-        setUser({})
-        navigate('/chat_bot')
-      }
-    })
+    setLoggedIn(false)
+    setUser({})
+    localStorage.removeItem('TokenChatBoot')
+    navigate('/chat_bot/login')
   }
 
   return (

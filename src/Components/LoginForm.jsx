@@ -7,17 +7,24 @@ export const LoginForm = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
-  const navigate = useNavigate()
   const { login } = useAuth()
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const response = await axios.post('/login', { user: username, password })
       if (response.status === 200) {
-        const { data } = response
-        login(data.auth, data.UserLogin)
-        navigate('/chat_bot/dashboard')
+        const { auth, token } = response.data
+        localStorage.setItem('TokenChatBoot', token)
+
+        const response2 = await axios.get('/profile', { headers: { Authorization: `Bearer ${token}` } })
+        if (response2.status === 200) {
+          const user = response2.data
+          login(auth, user)
+          navigate('/chat_bot/dashboard')
+        }
       }
     } catch (error) {
       if (error.message === 'Network Error') {
