@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserContext.jsx'
 import { RenderUsers } from './RenderUsers.jsx'
 import { Loading } from './IconSvg.jsx'
-import { API } from '../App.jsx'
 import axios from 'axios'
 
 function useFilters ({ usuarios }) {
@@ -34,7 +33,7 @@ export function UserChatBot ({ select }) {
       if (response.status === 200) {
         const data = response.data
         const cedulas = data.map(user => user.cedula)
-        const response2 = await axios.post(`${API}/getCF`, { ccs: cedulas })
+        const response2 = await axios.post('/getCF', { ccs: cedulas })
         const data2 = response2.data
         const updatedUsers = data.map((user, index) => ({
           ...user,

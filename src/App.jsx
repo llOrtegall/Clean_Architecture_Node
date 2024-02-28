@@ -8,8 +8,6 @@ import axios from 'axios'
 import { ForgotPassword } from './Components/ForgotPassword'
 import { ResetPassword } from './Components/ResetPassword'
 
-export const API = 'http://172.20.1.216:4002'
-
 const ProtectedRoute = ({ children }) => {
   const { loggedIn } = useAuth()
 
@@ -19,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
 }
 
 export function App () {
-  axios.defaults.baseURL = API
+  axios.defaults.baseURL = '/api'
   axios.defaults.withCredentials = true
 
   const { login } = useAuth()
