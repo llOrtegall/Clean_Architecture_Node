@@ -13,14 +13,14 @@ export function AuthProvider ({ children }) {
     if (auth === true) {
       setLoggedIn(true)
       setUser(user)
-      navigate('/chat_bot/dashboard')
+      navigate('/dashboard')
     }
   }
   const logout = () => {
     setLoggedIn(false)
     setUser({})
     localStorage.removeItem('TokenChatBoot')
-    navigate('/chat_bot/login')
+    navigate('/')
   }
 
   return (
