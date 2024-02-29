@@ -23,7 +23,7 @@ export const LoginForm = () => {
         if (response2.status === 200) {
           const user = response2.data
           login(auth, user)
-          navigate('/chat_bot/dashboard')
+          navigate('/dashboard')
         }
       }
     } catch (error) {
