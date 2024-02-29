@@ -17,8 +17,7 @@ const ProtectedRoute = ({ children }) => {
 }
 
 export function App () {
-  axios.defaults.baseURL = '/api'
-  axios.defaults.withCredentials = true
+  axios.defaults.baseURL = 'http://172.20.1.110:3030/api'
 
   const { login } = useAuth()
 
