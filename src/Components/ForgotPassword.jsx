@@ -21,7 +21,7 @@ export function ForgotPassword () {
           setMessage('Se ha generado la solicitud para recuperar contraseña contacte al administrador del Sistema')
           setTimeout(() => {
             setLoading(false)
-            navigate('/chat_bot/resetPassword')
+            navigate('/resetPassword')
             setMessage('')
           }, 4500)
         }
