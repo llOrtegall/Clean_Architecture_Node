@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const envMysqlSchema = z.object({
   DB_MYSQL_USER: z.string().min(4),
-  DB_MYSQL_HOST: z.string().url(),
+  DB_MYSQL_HOST: z.string().min(4),
   DB_MYSQL_PASS: z.string().min(2),
   DB_MYSQL_PORT: z.string().min(1).transform(v => parseInt(v, 10)),
   DB_MYSQL_NAME: z.string().min(2)

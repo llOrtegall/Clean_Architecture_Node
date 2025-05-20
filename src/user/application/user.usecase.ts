@@ -13,6 +13,9 @@ export class UserUseCase {
     return userCreated
   }
 
-  public registerUserAndNotify() { }
+  public async getDetailUser(uuid: string) {
+    const user = await this.userRepository.findUserById(uuid)
+    return user
+   }
 
 }

@@ -1,5 +1,5 @@
 import { Model, DataTypes, type InferAttributes, type InferCreationAttributes } from 'sequelize';
-import { MysqlConnection } from '../connections/Mysql';
+import { connectionDb } from '../connections/connection';
 
 class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
   declare uuid?: string
@@ -14,7 +14,7 @@ UserModel.init({
   email: { type: DataTypes.STRING(120), allowNull: false },
   description: { type: DataTypes.STRING, allowNull: true, defaultValue: null }
 }, {
-  sequelize: MysqlConnection,
+  sequelize: connectionDb,
   timestamps: true
 })
 
