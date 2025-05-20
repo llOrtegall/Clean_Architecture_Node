@@ -1,21 +1,21 @@
 import { Model, DataTypes, type InferAttributes, type InferCreationAttributes } from 'sequelize';
-import { MysqlConnection } from '../../../connections/Mysql';
+import { MysqlConnection } from '../connections/Mysql';
 
-class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
   declare uuid?: string
   declare name: string
   declare email: string
   declare description: string | null
 }
 
-User.init({
-  uuid: { type: DataTypes.STRING, primaryKey: true, unique: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  email: { type: DataTypes.STRING, allowNull: false },
-  description: { type: DataTypes.STRING, allowNull: false }
+UserModel.init({
+  uuid: { type: DataTypes.STRING(32), primaryKey: true, unique: true },
+  name: { type: DataTypes.STRING(50), allowNull: false },
+  email: { type: DataTypes.STRING(120), allowNull: false },
+  description: { type: DataTypes.STRING, allowNull: true, defaultValue: null }
 }, {
   sequelize: MysqlConnection,
   timestamps: true
 })
 
-export { User }
+export { UserModel }
