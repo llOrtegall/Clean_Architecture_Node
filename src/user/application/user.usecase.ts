@@ -3,19 +3,18 @@ import { type UserEntity } from '../domain/user.entity';
 import { UserValue } from "../domain/user.value";
 
 export class UserUseCase {
-  constructor(private readonly userRepository: UserRepository) {
+  constructor(private readonly userRepository: UserRepository) { }
 
-  }
-
-  public async registerUser({ name, email, description }: Omit<UserEntity, 'uuid'>) {
+  public registerUser = async ({ name, email, description }: Omit<UserEntity, 'uuid'>) => {
     const userValue = new UserValue({ name, email, description });
-    const userCreated = await this.userRepository.registerUser(userValue)
-    return userCreated
+    console.log("Objeto a insertar:", userValue.toObject()); // <-- Agrega esto
+    const userCreated = await this.userRepository.registerUser(userValue.toObject());
+    return userCreated;
   }
 
-  public async getDetailUser(uuid: string) {
+  public getDetailUser = async (uuid: string) => {
     const user = await this.userRepository.findUserById(uuid)
     return user
-   }
+  }
 
 }

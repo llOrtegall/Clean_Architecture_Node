@@ -1,12 +1,12 @@
-import { z } from "zod";
 import type { UserUseCase } from "../../application/user.usecase";
+import { validateUser } from "../schemas/controllers";
 import type { Request, Response } from "express";
+import { z } from "zod";
 
 export class UserController {
-  constructor(private userUseCase: UserUseCase) {
-  }
+  constructor(private userUseCase: UserUseCase) {}
 
-  public async getController(req: Request, res: Response) {
+  public  getController = async (req: Request, res: Response) => {
     const uuidSchema = z.object({ uuid: z.string() });
 
     const { success, data, error } = uuidSchema.safeParse(req.query);
@@ -24,12 +24,18 @@ export class UserController {
     }
   }
 
-  public async insertController(req: Request, res: Response) {
+  public insertController = async(req: Request, res: Response) => {
     try {
-      const user = await this.userUseCase.registerUser(req.body)
+      const validate = validateUser(req.body)
+      const user = await this.userUseCase.registerUser(validate)
       res.status(201).json({ user })
-    } catch (error) {
-
+    } catch (err) {
+      console.log(err);
+      if(err instanceof Error){
+        res.status(400).json({ message: err.message })
+        return
+      }
+      res.status(500).json({ message: 'error interno en el servidor'})
     }
   }
 }
