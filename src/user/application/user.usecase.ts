@@ -21,4 +21,9 @@ export class UserUseCase {
     return user
   }
 
+  public listUsers = async () => {
+    const users = await this.userRepository.listUsers()
+    return users
+  }
+
 }

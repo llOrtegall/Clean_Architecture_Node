@@ -16,7 +16,7 @@ export class MongoRepository implements UserRepository {
   }
 
   async findUserById(uuid: string): Promise<UserEntity | null> {
-    const user = await UserModelMongo.findById(uuid)
+    const user = await UserModelMongo.findOne({ uuid })
 
     if (!user) return null
 

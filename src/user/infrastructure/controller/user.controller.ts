@@ -40,4 +40,13 @@ export class UserController {
       res.status(500).json({ message: 'error interno en el servidor'})
     }
   }
+
+  public listController = async (req: Request, res: Response) => {
+    try {
+      const users = await this.userUseCase.listUsers()
+      res.status(200).json({ users })
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" })
+    }
+  }
 }

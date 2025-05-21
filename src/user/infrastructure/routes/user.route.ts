@@ -11,8 +11,8 @@ const routerUser = Router()
  */
 
 // const MysqlUserRepository = new MysqlRepository()
-
 const MysqlUserRepository = new MongoRepository()
+
 /**
  * Iniciamos casos de uso
  */
@@ -26,5 +26,6 @@ const userCtrl = new UserController(userUseCase)
  */
 routerUser.post('/user', userCtrl.insertController)
 routerUser.get('/user/:uuid', userCtrl.getController)
+routerUser.get('/users', userCtrl.listController)
 
 export { routerUser }
