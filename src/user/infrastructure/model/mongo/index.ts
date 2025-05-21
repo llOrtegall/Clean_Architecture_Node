@@ -1,0 +1,15 @@
+import { model, Schema } from "mongoose";
+import type { UserEntity } from "../../../domain/user.entity";
+
+const userSchema = new Schema<UserEntity>({
+  name: { type: String, require: true },
+  email: { type: String, require: true },
+  uuid: { type: String, require: true, unique: true },
+  document: { type: String, require: true },
+  birthDate: { type: String, require: true },
+  description: { type: String, require: false }
+}, {
+  timestamps: true
+})
+
+export default model<UserEntity>('User', userSchema)
