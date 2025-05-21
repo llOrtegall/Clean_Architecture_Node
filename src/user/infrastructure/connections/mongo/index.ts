@@ -1,14 +1,11 @@
-import { DB_MONGO_HOST, DB_MONGO_PORT, DB_MONGO_NAME } from "../../schemas/mongo.conn";
-import { createConnection } from "mongoose";
+import { DB_MONGO_NAME, DB_MONGO_PASS, DB_MONGO_PORT, DB_MONGO_USER, DB_MONGO_HOST } from '../../schemas/mongo.conn';
+import mongoose from 'mongoose';
 
-const connectionMongo = async () => {
+export const connectMongo = async () => {
   try {
-    const connection = createConnection(`mongodb://${DB_MONGO_HOST}:${DB_MONGO_PORT}/${DB_MONGO_NAME}`)
-    return connection
+    const connection = await mongoose.connect(`mongodb://${DB_MONGO_USER}:${DB_MONGO_PASS}@${DB_MONGO_HOST}:${DB_MONGO_PORT}`)
+    console.log(connection.version)
   } catch (error) {
     console.log(error)
-    throw new Error('Error al conectar a la base de datos mongo')
   }
 }
-
-export default connectionMongo
