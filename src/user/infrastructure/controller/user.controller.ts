@@ -33,6 +33,7 @@ export class UserController {
       res.status(201).json({ user })
     } catch (err) {
       console.log(err);
+    
       if(err instanceof Error){
         res.status(400).json({ message: err.message })
         return

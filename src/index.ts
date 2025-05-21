@@ -2,7 +2,6 @@ import express, { urlencoded } from 'express';
 import morgan from 'morgan';
 import cors from 'cors'
 
-import { connectMongo } from './user/infrastructure/connections/mongo';
 import { routerUser } from './user/infrastructure/routes/user.route';
 import connMySqlDb from './user/infrastructure/connections/mysql';
 
@@ -22,7 +21,6 @@ app.get('/', (_req, res) => {
 app.use(routerUser)
 
 connMySqlDb.authenticate();
-connectMongo();
 
 app.listen(PORT, () => {
   console.log('Server running on: http://localhost:' + PORT);
