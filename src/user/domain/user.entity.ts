@@ -1,7 +1,9 @@
 export interface UserEntity {
+  uuid?: string;
+  document: string;
+  birthDate: string;
   name: string;
   email: string;
-  uuid?: string;
   description?: string;
 }
 

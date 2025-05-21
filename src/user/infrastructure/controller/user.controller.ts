@@ -27,7 +27,9 @@ export class UserController {
   public insertController = async(req: Request, res: Response) => {
     try {
       const validate = validateUser(req.body)
+
       const user = await this.userUseCase.registerUser(validate)
+      
       res.status(201).json({ user })
     } catch (err) {
       console.log(err);

@@ -5,21 +5,16 @@ export class UserValue implements UserEntity {
   uuid: string;
   name: string;
   email: string;
+  birthDate: string;
+  document: string;
   description?: string
 
-  constructor({ name, email, description }: UserEntity) {
+  constructor({ name, email, description, birthDate, document }: UserEntity) {
     this.uuid = v6()
+    this.document = document
+    this.birthDate = birthDate
     this.email = email
     this.name = name
     this.description = description ?? 'not provide descriptions'
-  }
-
-  toObject(): UserEntity {
-    return {
-      uuid: this.uuid,
-      name: this.name,
-      email: this.email,
-      description: this.description,
-    };
   }
 }

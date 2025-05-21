@@ -3,6 +3,8 @@ import { z } from "zod";
 const userSchema = z.object({
   name: z.string({ message: 'name is required' }),
   email: z.string({ message: 'email is required' }),
+  document: z.string({ message: 'document is required' }).min(5),
+  birthDate: z.string({ message: 'birthDate is required' }).date(),
   description: z.string().optional()
 })
 

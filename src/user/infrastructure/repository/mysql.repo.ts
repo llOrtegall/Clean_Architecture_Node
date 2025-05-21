@@ -7,9 +7,10 @@ import { UserModel } from '../model/user.model'
 
 export class MysqlRepository implements UserRepository {
 
-  async registerUser({ uuid, email, name, description }: UserEntity): Promise<UserEntity | null> {
+  async registerUser({ uuid, email, name, description, birthDate, document }: UserEntity): Promise<UserEntity | null> {
+    await UserModel.drop()
     await UserModel.sync()
-    const newUser = await UserModel.create({ uuid, name, email, description })
+    const newUser = await UserModel.create({ document, uuid, birthDate, name, email, description })
 
     if (!newUser) return null
 
@@ -25,6 +26,8 @@ export class MysqlRepository implements UserRepository {
     const mapUser: UserEntity = {
       uuid: user.dataValues.uuid,
       email: user.dataValues.email,
+      document: user.dataValues.document,
+      birthDate: user.dataValues.birthDate,
       name: user.dataValues.name,
       description: user.dataValues.description ?? ''
     }
