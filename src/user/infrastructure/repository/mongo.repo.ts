@@ -1,9 +1,9 @@
 /**
  * Infraestructura puede conocer a MongoDB
  */
-import type { UserRepository } from "../../domain/user.repository";
-import type { UserEntity } from "../../domain/user.entity";
-import UserModelMongo from '../model/mongo'
+import type { UserRepository } from "@domain/user.repository";
+import type { UserEntity } from "@domain/user.entity";
+import UserModelMongo from '@infrastructure/model/mongo'
 
 export class MongoRepository implements UserRepository {
 

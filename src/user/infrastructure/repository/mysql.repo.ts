@@ -1,16 +1,16 @@
 /**
  * Infraestructura puede conocer a Mysql
  */
-import type { UserRepository } from "../../domain/user.repository";
-import type { UserEntity } from "../../domain/user.entity";
-import UserModelMysql from '../model/mysql'
+import type { UserRepository } from "@domain/user.repository";
+import UserModelMysql from '@infrastructure/model/mysql';
+import type { UserEntity } from "@domain/user.entity";
 import { ValidationError } from 'sequelize'
 
 export class MysqlRepository implements UserRepository {
 
-  registerUser = async ({ uuid, email, name, description, birthDate, document }: UserEntity): Promise<UserEntity | null> => {
+  registerUser = async ({ uuid, email, name, description, birthDate, document, telefono }: UserEntity): Promise<UserEntity | null> => {
     try {
-      const newUser = await UserModelMysql.create({ document, uuid, birthDate, name, email, description })
+      const newUser = await UserModelMysql.create({ document, uuid, birthDate, name, email, description, telefono })
 
       if (!newUser) return null
 
@@ -36,7 +36,8 @@ export class MysqlRepository implements UserRepository {
         document: user.dataValues.document,
         birthDate: user.dataValues.birthDate,
         name: user.dataValues.name,
-        description: user.dataValues.description ?? ''
+        description: user.dataValues.description ?? '', 
+        telefono: user.dataValues.telefono
       }
 
       return mapUser

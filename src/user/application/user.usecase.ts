@@ -1,13 +1,13 @@
-import type { UserRepository } from "../domain/user.repository";
-import { type UserEntity } from '../domain/user.entity';
-import { UserValue } from "../domain/user.value";
+import type { UserRepository } from "@domain/user.repository";
+import { type UserEntity } from '@domain/user.entity';
+import { UserValue } from "@domain/user.value";
 
 export class UserUseCase {
   constructor(private readonly userRepository: UserRepository) { }
 
-  public registerUser = async ({ name, email, description, birthDate, document }: Omit<UserEntity, 'uuid'>) => {
+  public registerUser = async ({ name, email, description, birthDate, document, telefono }: Omit<UserEntity, 'uuid'>) => {
 
-    const userValue = new UserValue({ name, email, description, birthDate, document });
+    const userValue = new UserValue({ name, email, description, birthDate, document, telefono });
 
     const userCreated = await this.userRepository.registerUser(userValue);
 

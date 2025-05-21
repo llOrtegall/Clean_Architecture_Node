@@ -5,6 +5,7 @@ const userSchema = z.object({
   email: z.string({ message: 'email is required' }),
   document: z.string({ message: 'document is required' }).min(5),
   birthDate: z.string({ message: 'birthDate is required' }).date(),
+  telefono: z.string({ message: 'telefono is required' }).min(5),
   description: z.string().optional()
 })
 

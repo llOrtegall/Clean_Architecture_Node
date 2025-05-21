@@ -1,4 +1,4 @@
-import type { UserEntity } from "./user.entity";
+import type { UserEntity } from "@domain/user.entity";
 
 export interface UserRepository {
   registerUser(user: UserEntity): Promise<UserEntity | null>;

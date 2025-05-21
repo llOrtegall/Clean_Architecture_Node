@@ -1,5 +1,5 @@
-import type { UserUseCase } from "../../application/user.usecase";
-import { validateUser } from "../schemas/controllers";
+import type { UserUseCase } from "@application/user.usecase";
+import { validateUser } from "@infrastructure/schemas/controllers";
 import type { Request, Response } from "express";
 import { z } from "zod";
 
@@ -42,7 +42,7 @@ export class UserController {
     }
   }
 
-  public listController = async (req: Request, res: Response) => {
+  public listController = async (_req: Request, res: Response) => {
     try {
       const users = await this.userUseCase.listUsers()
       res.status(200).json({ users })

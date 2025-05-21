@@ -2,8 +2,8 @@ import express, { urlencoded } from 'express';
 import morgan from 'morgan';
 import cors from 'cors'
 
-import { routerUser } from './user/infrastructure/routes/user.route';
-import connMySqlDb from './user/infrastructure/connections/mysql';
+import { routerUser } from '@infrastructure/routes/user.route';
+import connMySqlDb from '@infrastructure/connections/mysql';
 
 const PORT = process.env.PORT ?? 4000
 const app = express();

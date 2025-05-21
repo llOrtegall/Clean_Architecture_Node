@@ -1,7 +1,6 @@
-import { UserController } from "../controller/user.controller";
-import { UserUseCase } from "../../application/user.usecase";
-import { MysqlRepository } from "../repository/mysql.repo";
-import { MongoRepository } from "../repository/mongo.repo";
+import { UserController } from "@infrastructure/controller/user.controller";
+import { MysqlRepository } from "@infrastructure/repository/mysql.repo";
+import { UserUseCase } from "@application/user.usecase";
 import { Router } from "express";
 
 const routerUser = Router()

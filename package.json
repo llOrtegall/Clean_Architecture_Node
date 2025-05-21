@@ -9,7 +9,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "bun run --watch src/index.ts",
-    "start": "bun run src/dist/index.js"
+    "start": "bun run dist/index.js",
+    "build": "tsc -b"
   },
   "devDependencies": {
     "@types/bun": "latest",

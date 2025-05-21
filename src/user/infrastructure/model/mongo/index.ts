@@ -1,5 +1,5 @@
+import type { UserEntity } from "@domain/user.entity";
 import { model, Schema } from "mongoose";
-import type { UserEntity } from "../../../domain/user.entity";
 
 const userSchema = new Schema<UserEntity>({
   name: { type: String, require: true },
