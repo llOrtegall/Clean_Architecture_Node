@@ -1,6 +1,6 @@
 import { Model, DataTypes, type InferAttributes, type InferCreationAttributes } from 'sequelize';
-import type { UserEntity } from '../../domain/user.entity';
-import { connectionDb } from '../connections/connection';
+import type { UserEntity } from '../../../domain/user.entity';
+import { connectionDb } from '../../connections/connection';
 
 class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> implements UserEntity {
   declare uuid?: string;
@@ -22,4 +22,4 @@ UserModel.init({
   timestamps: true
 })
 
-export { UserModel }
+export default UserModel

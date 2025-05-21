@@ -9,7 +9,7 @@ export class UserController {
   public  getController = async (req: Request, res: Response) => {
     const uuidSchema = z.object({ uuid: z.string() });
 
-    const { success, data, error } = uuidSchema.safeParse(req.query);
+    const { success, data, error } = uuidSchema.safeParse(req.params);
 
     if (!success) {
       res.status(400).json({ error: "Invalid or missing uuid parameter", message: error.format() });

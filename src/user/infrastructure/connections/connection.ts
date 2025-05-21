@@ -4,5 +4,5 @@ import { Sequelize } from "sequelize";
 export const connectionDb = new Sequelize(DB_MYSQL_NAME, DB_MYSQL_USER, DB_MYSQL_PASS, {
   host: DB_MYSQL_HOST,
   port: DB_MYSQL_PORT,
-  dialect: "postgres"
+  dialect: "mysql"
 })

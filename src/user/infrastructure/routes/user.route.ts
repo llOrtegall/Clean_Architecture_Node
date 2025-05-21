@@ -21,6 +21,6 @@ const userCtrl = new UserController(userUseCase)
  * definir rutas
  */
 routerUser.post('/user', userCtrl.insertController)
-routerUser.get('/user', userCtrl.getController)
+routerUser.get('/user/:uuid', userCtrl.getController)
 
 export { routerUser }

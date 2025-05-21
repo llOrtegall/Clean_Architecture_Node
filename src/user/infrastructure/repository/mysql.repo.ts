@@ -3,14 +3,14 @@
  */
 import type { UserRepository } from "../../domain/user.repository";
 import type { UserEntity } from "../../domain/user.entity";
-import { UserModel } from '../model/user.model'
+import UserModelMysql from '../model/mysql'
 
 export class MysqlRepository implements UserRepository {
 
   async registerUser({ uuid, email, name, description, birthDate, document }: UserEntity): Promise<UserEntity | null> {
-    await UserModel.drop()
-    await UserModel.sync()
-    const newUser = await UserModel.create({ document, uuid, birthDate, name, email, description })
+    await UserModelMysql.drop()
+    await UserModelMysql.sync()
+    const newUser = await UserModelMysql.create({ document, uuid, birthDate, name, email, description })
 
     if (!newUser) return null
 
@@ -18,8 +18,8 @@ export class MysqlRepository implements UserRepository {
   }
 
   async findUserById(uuid: string): Promise<UserEntity | null> {
-    await UserModel.sync()
-    const user = await UserModel.findByPk(uuid)
+    await UserModelMysql.sync()
+    const user = await UserModelMysql.findByPk(uuid)
 
     if (!user) return null
 
@@ -36,8 +36,8 @@ export class MysqlRepository implements UserRepository {
 
   }
   async listUsers(): Promise<UserEntity[] | null> {
-    await UserModel.sync()
-    const listAllUsers = await UserModel.findAll()
+    await UserModelMysql.sync()
+    const listAllUsers = await UserModelMysql.findAll()
 
     if(!listAllUsers) return null
 
