@@ -1,7 +1,7 @@
-import { DB_MONGO_HOST, DB_MONGO_PORT, DB_MONGO_NAME } from "../schemas/mongo.conn";
+import { DB_MONGO_HOST, DB_MONGO_PORT, DB_MONGO_NAME } from "../../schemas/mongo.conn";
 import { createConnection } from "mongoose";
 
-export const connectionMongo = async () => {
+const connectionMongo = async () => {
   try {
     const connection = createConnection(`mongodb://${DB_MONGO_HOST}:${DB_MONGO_PORT}/${DB_MONGO_NAME}`)
     return connection
@@ -10,3 +10,5 @@ export const connectionMongo = async () => {
     throw new Error('Error al conectar a la base de datos mongo')
   }
 }
+
+export default connectionMongo

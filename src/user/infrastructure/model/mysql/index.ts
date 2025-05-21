@@ -1,6 +1,6 @@
 import { Model, DataTypes, type InferAttributes, type InferCreationAttributes } from 'sequelize';
 import type { UserEntity } from '../../../domain/user.entity';
-import { connectionDb } from '../../connections/connection';
+import connection from '../../connections/mysql';
 
 class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> implements UserEntity {
   declare uuid?: string;
@@ -18,7 +18,7 @@ UserModel.init({
   email: { type: DataTypes.STRING(120), allowNull: false },
   description: { type: DataTypes.STRING, allowNull: true }
 }, {
-  sequelize: connectionDb,
+  sequelize: connection,
   timestamps: true
 })
 
