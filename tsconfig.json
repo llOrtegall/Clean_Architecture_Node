@@ -15,12 +15,13 @@
     "resolveJsonModule": true,
     
     // Paths para DDD (ajusta según tu estructura)
-    "baseUrl": "./src/user",
+    "baseUrl": "./src",
     "paths": {
-      "@domain/*": ["domain/*"],
-      "@application/*": ["application/*"],
-      "@infrastructure/*": ["infrastructure/*"],
-      "@shared/*": ["shared/*"]
+      "@domain/*": ["user/domain/*"],
+      "@application/*": ["user/application/*"],
+      "@infrastructure/*": ["user/infrastructure/*"],
+      "@shared/*": ["user/shared/*"],
+      "@connectors/*": ["connections/*"],
     },
 
     // Buenas prácticas
