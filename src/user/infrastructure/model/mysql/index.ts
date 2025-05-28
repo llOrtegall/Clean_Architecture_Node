@@ -1,6 +1,6 @@
 import { Model, DataTypes, type InferAttributes, type InferCreationAttributes } from 'sequelize';
-import connection from '@infrastructure/connections/mysql';
 import type { UserEntity } from '@domain/user.entity';
+import connection from '@connectors/mysql';
 
 class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> implements UserEntity {
   declare uuid?: string;

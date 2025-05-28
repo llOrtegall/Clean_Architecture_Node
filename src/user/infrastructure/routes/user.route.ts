@@ -8,7 +8,6 @@ const routerUser = Router()
 /**
  * Iniciar el repository
  */
-
 const MysqlUserRepository = new MysqlRepository()
 // const MysqlUserRepository = new MongoRepository()
 
