@@ -1,7 +1,7 @@
 import { UserModel } from '@infrastructure/persistence/models/User.model';
 import { UserRepository } from '@domain/repositories/UserRepository';
-import { User } from '@domain/entities/User';
 import { UserValue } from '@/domain/valueObjects/User.value';
+import { User } from '@domain/entities/User';
 
 export class MysqlUserRepository implements UserRepository {
 
