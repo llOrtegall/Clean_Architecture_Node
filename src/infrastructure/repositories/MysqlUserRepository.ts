@@ -34,6 +34,8 @@ export class MysqlUserRepository implements UserRepository {
 
     save = async (user: User): Promise<User> => {
         try {
+            await UserModel.sync(); // valida que la table en la db se encuentre creada y sincronizada
+
             const userEntity = new UserValue(
                 user.name,
                 user.email,
@@ -64,8 +66,13 @@ export class MysqlUserRepository implements UserRepository {
         throw new Error('Method not implemented.');
     }
 
-    delete(id: string): Promise<void> {
-        throw new Error('Method not implemented.');
+    delete = async (id: string): Promise<void> => {
+        try {
+            await UserModel.destroy({ where: { id } });
+        } catch (error) {
+            console.error('Error deleting user from MySQL:', error);
+            throw new Error('Error deleting user from MySQL');
+        }
     }
 
     findById(id: string): Promise<User | null> {

@@ -8,6 +8,7 @@ export const mysqlConn = new Sequelize(
     {
         host: MYSQL_HOST,
         port: MYSQL_PORT,
-        dialect: 'mysql'
+        dialect: 'mysql',
+        timezone: '-05:00'
     }
 );

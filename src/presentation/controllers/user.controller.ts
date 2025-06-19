@@ -25,4 +25,15 @@ export class UserController {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }
+
+    public deleteUserCtrl = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        try {
+            await this.userUseCases.deleteUser(id);
+            res.status(204).send();
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }
 }
