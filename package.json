@@ -11,7 +11,8 @@
   "dependencies": {
     "express": "^5.1.0",
     "mysql2": "^3.14.1",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
