@@ -2,9 +2,21 @@
   "name": "clean_architecture_node",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "bun --watch ./src/index.ts",
+    "start": "bun ./dist/index.js",
+    "build": "tcs"
+  },
   "private": true,
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1",
+    "sequelize": "^6.37.7"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.3"
   },
   "peerDependencies": {
     "typescript": "^5"
