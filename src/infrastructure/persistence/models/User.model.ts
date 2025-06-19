@@ -25,3 +25,5 @@ UserModel.init({
     tableName: 'USERS',
     timestamps: true
 })
+
+export { UserModel };
