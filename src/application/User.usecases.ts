@@ -1,6 +1,6 @@
-import { UserRepository } from "@domain/repositories/UserRepository";
+import type { UserRepository } from "@domain/repositories/UserRepository";
 import { UserValue } from "@domain/valueObjects/User.value";
-import { User } from "@domain/entities/User";
+import type { User } from "@domain/entities/User";
 
 export class UserUseCases {
   constructor(private userRepo: UserRepository) {}

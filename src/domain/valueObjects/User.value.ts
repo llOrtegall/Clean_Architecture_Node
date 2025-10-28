@@ -1,4 +1,4 @@
-import { User } from "@domain/entities/User";
+import type { User } from "@domain/entities/User";
 import { v4 as uuidv4 } from "uuid";
 
 export class UserValue implements User {
