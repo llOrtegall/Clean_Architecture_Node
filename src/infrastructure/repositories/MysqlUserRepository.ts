@@ -1,7 +1,6 @@
 import { UserModel } from "@infrastructure/persistence/models/User.model";
-import { UserRepository } from "@domain/repositories/UserRepository";
-import { UserValue } from "@/domain/valueObjects/User.value";
-import { User } from "@domain/entities/User";
+import type { UserRepository } from "@/domain/user/UserRepository";
+import { type UserInterface, User } from "@/domain/user/user.entity";
 
 export class MysqlUserRepository implements UserRepository {
   findAll = async (): Promise<User[]> => {
@@ -31,18 +30,13 @@ export class MysqlUserRepository implements UserRepository {
     }
   };
 
-  save = async (user: User): Promise<User> => {
+  save = async ({ name, email, password, documentId }: UserInterface): Promise<User> => {
     try {
       await UserModel.sync(); // valida que la table en la db se encuentre creada y sincronizada
 
-      const userEntity = new UserValue(
-        user.name,
-        user.email,
-        user.password,
-        user.documentId,
-      );
+      const newUserEntity = new User(name, email, password, documentId);
 
-      const newUser = await UserModel.create(userEntity);
+      const newUser = await UserModel.create(newUserEntity);
 
       const savedUser: User = {
         id: newUser.dataValues.id,

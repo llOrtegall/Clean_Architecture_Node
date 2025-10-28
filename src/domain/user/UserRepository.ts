@@ -1,9 +1,9 @@
-import type { User } from "@domain/entities/User";
+import type { UserInterface, User } from "@/domain/user/user.entity";
 
 export interface UserRepository {
   findAll(): Promise<User[]>;
-  save(user: User): Promise<User>;
-  update(user: User): Promise<User>;
+  save(user: UserInterface): Promise<User>;
+  update(user: UserInterface): Promise<User>;
   delete(id: string): Promise<void>;
 
   findById(id: string): Promise<User | null>;

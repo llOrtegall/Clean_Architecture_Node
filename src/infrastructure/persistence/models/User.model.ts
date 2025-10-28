@@ -6,11 +6,11 @@ import {
   type CreationOptional,
 } from "sequelize";
 import { mysqlConn } from "@infrastructure/persistence/connection";
-import { User } from "@/domain/entities/User";
+import type { UserInterface } from "@/domain/user/user.entity";
 
 class UserModel
   extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>>
-  implements User
+  implements UserInterface
 {
   declare id: CreationOptional<string>;
   declare name: string;
@@ -33,7 +33,7 @@ UserModel.init(
   },
   {
     sequelize: mysqlConn,
-    tableName: "USERS",
+    tableName: "Users",
     timestamps: true,
   },
 );

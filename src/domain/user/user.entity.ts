@@ -1,8 +1,14 @@
-import type { User } from "@domain/entities/User";
 import { v4 as uuidv4 } from "uuid";
 
-export class UserValue implements User {
-  id: string;
+export interface UserInterface {
+  name: string;
+  email: string;
+  documentId: string;
+  password: string;
+}
+
+export class User implements UserInterface {
+  id?: string;
 
   name: string;
   email: string;
