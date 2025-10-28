@@ -1,5 +1,4 @@
-import { z, treeifyError, prettifyError } from "zod";
-import { th } from "zod/v4/locales";
+import { z, prettifyError } from "zod";
 
 const UserSchema = z.object({
   id: z.string().optional(),
