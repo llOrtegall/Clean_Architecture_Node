@@ -1,27 +1,28 @@
-import type { UserRepository } from "@domain/repositories/UserRepository";
-import { UserValue } from "@domain/valueObjects/User.value";
-import type { User } from "@domain/entities/User";
+import type { UserRepository } from "@/domain/user/UserRepository";
+import { type UserInterface, User } from "@/domain/user/user.entity";
+import type { PasswordEncryptor } from "@application/service/PasswordEncrytor"
 
 export class UserUseCases {
-  constructor(private userRepo: UserRepository) {}
+  constructor(
+    private userRepo: UserRepository,
+    private encryptor: PasswordEncryptor
+  ) {}
 
   findAllUsers = async (): Promise<User[]> => {
     const users = await this.userRepo.findAll();
     return users;
   };
 
-  createUser = async (
-    name: string,
-    email: string,
-    password: string,
-    documentId: string,
-  ): Promise<User> => {
-    const user = new UserValue(name, email, password, documentId);
+  createUser = async ({ name, email, password, documentId }: UserInterface): Promise<User> => {
+    
+    const hashedPassword = await this.encryptor.hash(password)
+
+    const user = new User(name, email, hashedPassword, documentId);
     const savedUser = await this.userRepo.save(user);
     return savedUser;
   };
 
-  updateUser = async (user: User): Promise<User> => {
+  updateUser = async (user: UserInterface): Promise<User> => {
     const updatedUser = await this.userRepo.update(user);
     return updatedUser;
   };
