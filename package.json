@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "bun --watch ./src/index.ts",
     "start": "bun ./dist/index.js",
-    "build": "tcs"
+    "build": "tcs",
+    "format": "bunx biome format --write"
   },
   "private": true,
   "dependencies": {
+    "bcryptjs": "^3.0.2",
     "express": "5.1.0",
     "mysql2": "3.15.3",
     "sequelize": "6.37.7",
