@@ -26,9 +26,8 @@ const userController = new UserController(userUseCases);
  * Define the routes
  */
 
-userRouter.get('/users', userController.findAllUsersCtrl);
-userRouter.post('/users', userController.createUserCtrl)
-userRouter.delete('/users/:id', userController.deleteUserCtrl);
-
+userRouter.get("/users", userController.findAllUsersCtrl);
+userRouter.post("/users", userController.createUserCtrl);
+userRouter.delete("/users/:id", userController.deleteUserCtrl);
 
 export { userRouter };

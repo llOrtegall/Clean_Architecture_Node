@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    
+
     "outDir": "./dist",
     "baseUrl": "./src",
 
@@ -19,7 +19,7 @@
       "@infrastructure/*": ["infrastructure/*"],
       "@presentation/*": ["presentation/*"],
       "@shared/*": ["shared/*"],
-      "@data/*": ["data/*"],
+      "@data/*": ["data/*"]
     }
   }
 }
