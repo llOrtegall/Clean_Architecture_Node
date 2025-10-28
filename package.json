@@ -9,19 +9,19 @@
   },
   "private": true,
   "dependencies": {
-    "express": "^5.1.0",
-    "mysql2": "^3.14.1",
-    "sequelize": "^6.37.7",
-    "uuid": "^11.1.0",
-    "zod": "^4.1.12"
+    "express": "5.1.0",
+    "mysql2": "3.15.3",
+    "sequelize": "6.37.7",
+    "uuid": "11.1.0",
+    "zod": "4.1.12"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.1",
     "@types/bun": "latest",
-    "@types/express": "^5.0.3",
-    "@types/node": "^24.0.3"
+    "@types/express": "5.0.5",
+    "@types/node": "24.9.1"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "5.9.3"
   }
 }
