@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z, treeifyError } from "zod";
 
 const mysqlSchemaEnvironments = z.object({
   MYSQL_HOST: z.string().min(1, "MYSQL_HOST is required"),
@@ -14,7 +14,7 @@ const mysqlSchemaEnvironments = z.object({
 const { success, data, error } = mysqlSchemaEnvironments.safeParse(process.env);
 
 if (!success) {
-  console.error("Invalid MySQL environment variables:", error.errors);
+  console.error("Invalid MySQL environment variables:", treeifyError(error));
   process.exit(1);
 }
 
