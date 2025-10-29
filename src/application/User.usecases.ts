@@ -1,11 +1,11 @@
 import type { UserRepository } from "@/domain/user/UserRepository";
 import { type UserInterface, User } from "@/domain/user/user.entity";
-import type { PasswordEncryptor } from "@application/service/PasswordEncrytor"
+import type { PasswordEncryptor } from "@application/service/PasswordEncrytor";
 
 export class UserUseCases {
   constructor(
     private userRepo: UserRepository,
-    private encryptor: PasswordEncryptor
+    private encryptor: PasswordEncryptor,
   ) {}
 
   findAllUsers = async (): Promise<User[]> => {
@@ -13,9 +13,13 @@ export class UserUseCases {
     return users;
   };
 
-  createUser = async ({ name, email, password, documentId }: UserInterface): Promise<User> => {
-    
-    const hashedPassword = await this.encryptor.hash(password)
+  createUser = async ({
+    name,
+    email,
+    password,
+    documentId,
+  }: UserInterface): Promise<User> => {
+    const hashedPassword = await this.encryptor.hash(password);
 
     const user = new User(name, email, hashedPassword, documentId);
     const savedUser = await this.userRepo.save(user);
