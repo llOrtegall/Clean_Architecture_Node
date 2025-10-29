@@ -1,11 +1,9 @@
 import type { UserUseCases } from "@application/User.usecases";
-import { validateUserDto } from "@presentation/dto/user.schema"
+import { validateUserDto } from "@presentation/dto/user.schema";
 import type { Request, Response } from "express";
 
 export class UserController {
-  constructor(
-    private userUseCases: UserUseCases
-  ) {}
+  constructor(private userUseCases: UserUseCases) {}
 
   public findAllUsersCtrl = async (_req: Request, res: Response) => {
     try {
@@ -19,14 +17,14 @@ export class UserController {
 
   public createUserCtrl = async (req: Request, res: Response) => {
     try {
-      // validate info 
-      const { name, email, password, documentId } = validateUserDto(req.body)
+      // validate info
+      const { name, email, password, documentId } = validateUserDto(req.body);
 
-      const newUser = await this.userUseCases.createUser({ 
-        name, 
-        email, 
+      const newUser = await this.userUseCases.createUser({
+        name,
+        email,
         password, // La contraseña será hasheada en el caso de uso
-        documentId 
+        documentId,
       });
       res.status(201).json(newUser);
     } catch (error) {
