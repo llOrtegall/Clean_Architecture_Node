@@ -30,7 +30,12 @@ export class MysqlUserRepository implements UserRepository {
     }
   };
 
-  save = async ({ name, email, password, documentId }: UserInterface): Promise<User> => {
+  save = async ({
+    name,
+    email,
+    password,
+    documentId,
+  }: UserInterface): Promise<User> => {
     try {
       await UserModel.sync(); // valida que la table en la db se encuentre creada y sincronizada
 
