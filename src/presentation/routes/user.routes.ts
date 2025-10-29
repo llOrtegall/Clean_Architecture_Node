@@ -1,5 +1,5 @@
 import { MysqlUserRepository } from "@/infrastructure/repositories/MysqlUserRepository";
-import { BcryptPasswordEncryptor } from "@infrastructure/security/BcryptPassEncryptor"
+import { BcryptPasswordEncryptor } from "@infrastructure/security/BcryptPassEncryptor";
 import { UserController } from "@presentation/controllers/user.controller";
 import { UserUseCases } from "@/application/User.usecases";
 import { Router } from "express";
@@ -15,7 +15,10 @@ const userRepoMysql = new MysqlUserRepository();
 /**
  * Initialize the use cases
  */
-const userUseCases = new UserUseCases(userRepoMysql, new BcryptPasswordEncryptor);
+const userUseCases = new UserUseCases(
+  userRepoMysql,
+  new BcryptPasswordEncryptor(),
+);
 
 /**
  * Initialize the controller
